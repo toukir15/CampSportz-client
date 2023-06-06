@@ -1,17 +1,44 @@
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function SignUp() {
+  //   const handleSignUp = () => {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    // const { name, email, password } = data;
+    const imageData = data.image[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+    // console.log(imageData);
+
+    fetch(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_img_upload_key
+      } `,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+  //   console.log(errors);
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Log In</h1>
-          <p className="text-sm text-gray-400">
-            Sign in to access your account
-          </p>
+          <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
+          <p className="text-sm text-gray-400">Welcome to AirCNC</p>
         </div>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -19,9 +46,37 @@ export default function Login() {
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
+                Name
+              </label>
+              <input
+                {...register("name", { required: true })}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter Your Name Here"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                data-temp-mail-org="0"
+              />
+            </div>
+            <div>
+              <label htmlFor="image" className="block mb-2 text-sm">
+                Select Image:
+              </label>
+              <input
+                {...register("image", { required: true })}
+                required
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block mb-2 text-sm">
                 Email address
               </label>
               <input
+                {...register("email", { required: true })}
                 type="email"
                 name="email"
                 id="email"
@@ -38,6 +93,7 @@ export default function Login() {
                 </label>
               </div>
               <input
+                {...register("password", { required: true })}
                 type="password"
                 name="password"
                 id="password"
@@ -57,29 +113,25 @@ export default function Login() {
             </button>
           </div>
         </form>
-        <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
-            Forgot password?
-          </button>
-        </div>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           <p className="px-3 text-sm dark:text-gray-400">
-            Login with social accounts
+            Signup with social accounts
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
           <FcGoogle size={26} />
+
           <p>Continue with Google</p>
         </div>
         <p className="px-6 text-sm text-center text-gray-400">
-          Don't have an account yet?{" "}
+          Already have an account?{" "}
           <Link
-            to="/signup"
+            to="/login"
             className="hover:underline hover:text-rose-500 text-gray-600"
           >
-            Sign up
+            Login
           </Link>
           .
         </p>

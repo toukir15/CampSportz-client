@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Container from "../../Container";
 
 export default function Navbar() {
@@ -63,7 +64,9 @@ export default function Navbar() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Link to="/login">
+                  <a>Login</a>
+                </Link>
               </li>
             </ul>
           </div>
