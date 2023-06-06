@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 export default function SignUp() {
   //   const handleSignUp = () => {};
+  const { createUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -11,7 +14,8 @@ export default function SignUp() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    // const { name, email, password } = data;
+    const { name, email, password } = data;
+
     const imageData = data.image[0];
     const formData = new FormData();
     formData.append("image", imageData);
@@ -27,7 +31,12 @@ export default function SignUp() {
       }
     )
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        createUser(email, password)
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+        console.log(data);
+      });
   };
   //   console.log(errors);
   return (
