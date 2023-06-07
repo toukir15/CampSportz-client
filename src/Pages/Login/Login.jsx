@@ -1,7 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
+  const { login, googleSignIn } = useContext(AuthContext);
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+
+  // google sign in
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    const { email, password } = data;
+
+    // login
+    login(email, password)
+      .then((result) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setError(error.message);
+      });
+  };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -12,6 +49,7 @@ export default function Login() {
           </p>
         </div>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -22,6 +60,7 @@ export default function Login() {
                 Email address
               </label>
               <input
+                {...register("email", { required: true })}
                 type="email"
                 name="email"
                 id="email"
@@ -38,6 +77,7 @@ export default function Login() {
                 </label>
               </div>
               <input
+                {...register("password", { required: true })}
                 type="password"
                 name="password"
                 id="password"
@@ -55,6 +95,7 @@ export default function Login() {
             >
               Continue
             </button>
+            {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
           </div>
         </form>
         <div className="space-y-1">
@@ -69,7 +110,10 @@ export default function Login() {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <div
+          onClick={handleGoogleSignIn}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={26} />
           <p>Continue with Google</p>
         </div>

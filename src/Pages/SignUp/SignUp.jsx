@@ -1,12 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 export default function SignUp() {
-  //   const handleSignUp = () => {};
-  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const { createUser, googleSignIn, updateUserProfile } =
+    useContext(AuthContext);
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => console.log(result.user))
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
+  };
   const {
     register,
     handleSubmit,
@@ -32,10 +42,24 @@ export default function SignUp() {
     )
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data.data.display_url);
+
+        // create user with email and password
         createUser(email, password)
-          .then((res) => res.json())
-          .then((data) => console.log(data));
-        console.log(data);
+          .then((result) => {
+            console.log(result);
+
+            // update user profile
+            updateUserProfile(name, data.data.display_url)
+              .then(() => navigate("/"))
+              .catch((userUpdateError) => {
+                setError(userUpdateError.message);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            setError(error.message);
+          });
       });
   };
   //   console.log(errors);
@@ -120,6 +144,7 @@ export default function SignUp() {
             >
               Continue
             </button>
+            {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
           </div>
         </form>
         <div className="flex items-center pt-4 space-x-1">
@@ -129,9 +154,11 @@ export default function SignUp() {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <div
+          onClick={handleGoogleSignIn}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={26} />
-
           <p>Continue with Google</p>
         </div>
         <p className="px-6 text-sm text-center text-gray-400">
