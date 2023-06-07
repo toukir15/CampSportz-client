@@ -1,9 +1,10 @@
 import Container from "../../../components/Container";
+import Banner from "./Banner";
 
 export default function Home() {
   return (
     <Container>
-      <div className="my-10">this is home</div>
+      <Banner />
     </Container>
   );
 }
