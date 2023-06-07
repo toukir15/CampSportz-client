@@ -1,0 +1,56 @@
+[
+    {
+        "class_id": "C001",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": 99.99,
+        "student_quantity": 20,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    },
+    {
+        "class_id": "C002",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": "Free",
+        "student_quantity": 18,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    },
+    {
+        "class_id": "C003",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": 99.99,
+        "student_quantity": 15,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    },
+    {
+        "class_id": "C004",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": 99.99,
+        "student_quantity": 22,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    },
+    {
+        "class_id": "C005",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": 99.99,
+        "student_quantity": 17,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    },
+    {
+        "class_id": "C006",
+        "class_name": "Learn how to swim",
+        "instructor_name": "Alex",
+        "available_seat": 10,
+        "price": 99.99,
+        "student_quantity": 19,
+        "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg"
+    }
+]

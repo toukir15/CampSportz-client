@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../../Container";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
@@ -17,6 +17,23 @@ export default function Navbar() {
           <div className="flex-1">
             <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
           </div>
+          <ul className="flex gap-8 font-medium">
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "text-pink-500" : "")}
+            >
+              Home
+            </NavLink>
+            <NavLink to="/instructors">
+              <li>Instructors</li>
+            </NavLink>
+            <NavLink to="/courses">
+              <li>Courses</li>
+            </NavLink>
+            <NavLink>
+              <li>Dashboard</li>
+            </NavLink>
+          </ul>
           <div className="flex-none">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -67,7 +84,7 @@ export default function Navbar() {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
               >
                 <li>
                   <a className="justify-between">
