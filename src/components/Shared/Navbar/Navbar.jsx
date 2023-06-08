@@ -30,7 +30,7 @@ export default function Navbar() {
             <NavLink to="/courses">
               <li>Courses</li>
             </NavLink>
-            <NavLink>
+            <NavLink to="/dashboard">
               <li>Dashboard</li>
             </NavLink>
           </ul>
