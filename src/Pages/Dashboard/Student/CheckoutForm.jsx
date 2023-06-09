@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import "./CheckoutForm.css";
+// import "./CheckoutForm.css";
 
 export default function CheckoutForm({ price, selectedCourses }) {
   const { user } = useContext(AuthContext);
@@ -11,7 +11,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  // console.log(selectedCourses);
+  console.log(selectedCourses);
 
   // console.log("selectcourses chckout", selectedCourses);
 

@@ -8,7 +8,7 @@ export default function SelectedCourses() {
 
   // handle delete
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/courses/${id}`, {
+    fetch(`http://localhost:5000/selectCourses/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

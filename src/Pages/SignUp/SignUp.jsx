@@ -9,9 +9,24 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const { createUser, googleSignIn, updateUserProfile } =
     useContext(AuthContext);
+
+  // google sign in
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        const user = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        //make user api
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+      })
       .catch((error) => {
         console.log(error);
         setError(error.message);
@@ -51,7 +66,20 @@ export default function SignUp() {
 
             // update user profile
             updateUserProfile(name, data.data.display_url)
-              .then(() => navigate("/"))
+              .then(() => {
+                //make users api
+                const user = { name, email };
+                fetch("http://localhost:5000/users", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(user),
+                })
+                  .then((res) => res.json())
+                  .then((data) => console.log(data));
+                navigate("/");
+              })
               .catch((userUpdateError) => {
                 setError(userUpdateError.message);
               });

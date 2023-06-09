@@ -19,7 +19,7 @@ export default function SingleCourse({ courseData }) {
   const handleSelectCourse = () => {
     console.log(price);
     const courseData = { course_id, course_name, price, category, image };
-    fetch("http://localhost:5000/courses", {
+    fetch("http://localhost:5000/selectCourses", {
       method: "POST",
       headers: {
         "content-type": "application/json",

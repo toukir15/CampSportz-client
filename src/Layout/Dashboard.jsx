@@ -28,6 +28,12 @@ export default function Dashboard() {
               <a>Enrolled Courses</a>
             </li>
           </Link>
+          <hr />
+          <Link to="/dashboard/addclass">
+            <li>
+              <a>Add a Class</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

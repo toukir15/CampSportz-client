@@ -6,7 +6,7 @@ export default function PopularClasses() {
   const [classesData, setClassesData] = useState([]);
   // console.log(classesData);
   useEffect(() => {
-    fetch("classes.json")
+    fetch("http://localhost:5000/courses")
       .then((res) => res.json())
       .then((data) => setClassesData(data));
   }, []);
