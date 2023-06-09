@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import useSelectedCourses from "../../../components/Hooks/useSelectedCourses";
 import Swal from "sweetalert2";
 
-export default function SelectedClasses() {
+export default function SelectedCourses() {
   const [selectedCourses, refetch] = useSelectedCourses();
-  console.log(selectedCourses);
+  // console.log(selectedCourses);
 
   // handle delete
   const handleDelete = (id) => {
@@ -79,7 +79,7 @@ export default function SelectedClasses() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {course.class_name}
+                {course.course_name}
               </td>
               <td className="px-6 py-4">{course.category}</td>
               <td className="px-6 py-4  ">

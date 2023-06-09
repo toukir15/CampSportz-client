@@ -10,15 +10,15 @@ export default function SingleCourse({ courseData }) {
     price,
     available_seat,
     instructor_name,
-    class_name,
+    course_name,
     category,
-    class_id,
+    course_id,
   } = courseData;
 
   //  handle selected course
   const handleSelectCourse = () => {
     console.log(price);
-    const courseData = { class_id, class_name, price, category, image };
+    const courseData = { course_id, course_name, price, category, image };
     fetch("http://localhost:5000/courses", {
       method: "POST",
       headers: {
@@ -73,7 +73,7 @@ export default function SingleCourse({ courseData }) {
                 <p>3.5 (3k reviews)</p>
               </div>
             </div>
-            <p className="text-2xl font-medium mb-2">{class_name}</p>
+            <p className="text-2xl font-medium mb-2">{course_name}</p>
             <div className="flex justify-end ">
               <button
                 onClick={handleSelectCourse}

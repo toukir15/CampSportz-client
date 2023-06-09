@@ -20,12 +20,14 @@ export default function Dashboard() {
           {/* Sidebar content here */}
           <Link to="/dashboard/selected">
             <li>
-              <a>Selected Classes</a>
+              <a>Selected Courses</a>
             </li>
           </Link>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <Link to="/dashboard/enrolled">
+            <li>
+              <a>Enrolled Courses</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

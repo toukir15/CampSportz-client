@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import "./CheckoutForm.css";
 
 export default function CheckoutForm({ price, selectedCourses }) {
   const { user } = useContext(AuthContext);
@@ -10,7 +11,9 @@ export default function CheckoutForm({ price, selectedCourses }) {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  console.log(price);
+  // console.log(selectedCourses);
+
+  // console.log("selectcourses chckout", selectedCourses);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -70,17 +73,28 @@ export default function CheckoutForm({ price, selectedCourses }) {
     console.log("payment intent", paymentIntent);
 
     setProcessing(false);
-    if (paymentIntent.status === "succeeded") {
+    if (paymentIntent?.status === "succeeded") {
       // const transactionId = paymentIntent.id;
       setTransactionId(paymentIntent.id);
+      const coursesName = await selectedCourses.map(
+        (course) => course.course_name
+      );
+      const coursesId = await selectedCourses.map((course) => course.course_id);
+      const selectedCoursesId = await selectedCourses.map(
+        (course) => course._id
+      );
+      console.log(coursesName, coursesId);
 
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
+        date: new Date(),
         quantity: selectedCourses.length,
-        course_id: selectedCourses.map((course) => course._id),
-        course_name: selectedCourses.map((course) => course.name),
+        selected_courses_id: selectedCoursesId,
+        courses_id: coursesId,
+        orderStatus: "pending",
+        courses_name: coursesName,
       };
       console.log(payment);
       fetch("http://localhost:5000/payments", {

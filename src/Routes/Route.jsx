@@ -6,9 +6,10 @@ import SignUp from "../Pages/Signup/Signup";
 import Instructors from "../Pages/Instructors/Instructors";
 import Courses from "../Pages/Classes/Courses";
 import Dashboard from "../Layout/Dashboard";
-import SelectedClasses from "../Pages/Dashboard/Student/SelectedClasses";
 import PrivateRoute from "./PrivateRoute";
 import Payment from "../Pages/Dashboard/Student/Payment";
+import SelectedCourses from "../Pages/Dashboard/Student/SelectedCourses";
+import EnrolledCourses from "../Pages/Dashboard/Student/EnrolledCourses";
 // import Courses from "../Pages/Courses/Courses";
 // import Courses from "../Pages/Courses/Courses";
 
@@ -42,7 +43,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "selected",
-        element: <SelectedClasses />,
+        element: <SelectedCourses />,
+      },
+      {
+        path: "enrolled",
+        element: <EnrolledCourses />,
       },
       {
         path: "payment",

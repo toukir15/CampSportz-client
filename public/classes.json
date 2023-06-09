@@ -1,7 +1,7 @@
 [
     {
-        "class_id": "C001",
-        "class_name": "Learn how to swim",
+        "course_id": "C001",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
@@ -10,8 +10,8 @@
         "category": "Football"
     },
     {
-        "class_id": "C002",
-        "class_name": "Learn how to swim",
+        "course_id": "C002",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
@@ -20,8 +20,8 @@
         "category": "Football"
     },
     {
-        "class_id": "C003",
-        "class_name": "Learn how to swim",
+        "course_id": "C003",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
@@ -30,8 +30,8 @@
         "category": "Football"
     },
     {
-        "class_id": "C004",
-        "class_name": "Learn how to swim",
+        "course_id": "C004",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
@@ -40,8 +40,8 @@
         "category": "Football"
     },
     {
-        "class_id": "C005",
-        "class_name": "Learn how to swim",
+        "course_id": "C005",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
@@ -50,8 +50,8 @@
         "category": "Football"
     },
     {
-        "class_id": "C006",
-        "class_name": "Learn how to swim",
+        "course_id": "C006",
+        "course_name": "Learn how to swim",
         "instructor_name": "Alex",
         "available_seat": 10,
         "price": 99.99,
