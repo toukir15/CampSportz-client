@@ -79,7 +79,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
       const coursesName = await selectedCourses.map(
         (course) => course.course_name
       );
-      const coursesId = await selectedCourses.map((course) => course.course_id);
+      const coursesId = await selectedCourses.map((course) => course._id);
       const selectedCoursesId = await selectedCourses.map(
         (course) => course._id
       );

@@ -11,6 +11,7 @@ import Payment from "../Pages/Dashboard/Student/Payment";
 import SelectedCourses from "../Pages/Dashboard/Student/SelectedCourses";
 import EnrolledCourses from "../Pages/Dashboard/Student/EnrolledCourses";
 import AddClass from "../Pages/Dashboard/Instructor/AddClass";
+import MyCourse from "../Pages/Dashboard/Instructor/MyCourse";
 // import Courses from "../Pages/Courses/Courses";
 // import Courses from "../Pages/Courses/Courses";
 
@@ -53,8 +54,12 @@ export const router = createBrowserRouter([
 
       // instructor
       {
-        path: "addclass",
+        path: "addcourse",
         element: <AddClass />,
+      },
+      {
+        path: "mycourse",
+        element: <MyCourse />,
       },
 
       {

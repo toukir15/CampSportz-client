@@ -1,5 +1,6 @@
 // import Container from "../../../components/Container";
 
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { BiCategoryAlt, BiDollar } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
@@ -7,22 +8,45 @@ import {
   MdOutlineAddPhotoAlternate,
   MdOutlineDriveFileRenameOutline,
 } from "react-icons/md";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function AddClass() {
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+
+    const courseInfo = {
+      course_name: data.courseName,
+      instructor_name: data.instructorName,
+      instructor_email: data.instructorEmail,
+      category: data.category,
+      price: data.price,
+      available_seats: data.seats,
+      status: "pending",
+    };
+    fetch("http://localhost:5000/courses", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(courseInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   //   console.log(errors);
 
   return (
     <>
       <div className="container mx-auto ">
         <div className="flex justify-center ">
-          <h2 className="text-4xl font-medium flex justify-center pb-2 w-52 my-8 border-b-2">
-            Add a Class
+          <h2 className="text-4xl font-medium flex justify-center pb-2 w-72 my-8 border-b-2">
+            Add a Course
           </h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="px-4">
@@ -87,7 +111,8 @@ export default function AddClass() {
                   type="text"
                   name="instructorName"
                   id="input-group-1"
-                  // defaultValue={user?.displayName}
+                  defaultValue={user?.displayName}
+                  readOnly
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Instructor Name"
                 />
@@ -116,7 +141,8 @@ export default function AddClass() {
                   type="email"
                   name="instructorEmail"
                   id="input-group-1"
-                  // defaultValue={user?.email}
+                  defaultValue={user?.email}
+                  readOnly
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   //   placeholder="seller@email.com"
                 />
@@ -152,6 +178,7 @@ export default function AddClass() {
                   <BiDollar className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </div>
                 <input
+                  {...register("price", { required: true })}
                   type="number"
                   name="price"
                   id="input-group-1"

@@ -29,9 +29,19 @@ export default function Dashboard() {
             </li>
           </Link>
           <hr />
-          <Link to="/dashboard/addclass">
+          <Link to="/dashboard/addcourse">
             <li>
               <a>Add a Class</a>
+            </li>
+          </Link>
+          <Link to="/dashboard/mycourse">
+            <li>
+              <a>My Course</a>
+            </li>
+          </Link>
+          <Link to="/">
+            <li>
+              <a>home</a>
             </li>
           </Link>
         </ul>

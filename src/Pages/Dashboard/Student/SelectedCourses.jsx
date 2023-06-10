@@ -33,7 +33,7 @@ export default function SelectedCourses() {
       <div className="mb-8 flex w-full justify-between">
         <p className="w-[1px]"></p>
         <p className=" text-2xl font-medium md:ml-80 ">
-          Total Price: ${total.toFixed(2)}
+          Total Price: ${total && total?.toFixed(2)}
         </p>
         <Link to="/dashboard/payment">
           <button className="mr-6 px-6 py-2 bg-black text-md font-medium rounded  text-[#F7FF62]">
