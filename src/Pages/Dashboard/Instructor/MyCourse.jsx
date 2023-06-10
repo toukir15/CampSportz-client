@@ -1,21 +1,34 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { useState } from "react";
+import useMyCourse from "../../../components/Hooks/useMyCourse";
 
 export default function MyCourse() {
-  const { user } = useContext(AuthContext);
+  const [myCourseData, refetch] = useMyCourse();
+  const [submitId, setSubmitId] = useState("");
+  console.log(submitId);
 
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    if (user?.email) {
-      console.log("render ");
-      fetch(`http://localhost:5000/courses?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setCourses(data));
-    }
-  }, [user?.email]);
-
+  // handle pending status
   const handlePending = (id) => {
-    fetch(`http://localhost:5000/courses/${id}`);
+    console.log(id);
+    setSubmitId(id);
+    fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          refetch();
+        }
+      });
+  };
+
+  const handleSubmit = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();
+        }
+      });
   };
 
   return (
@@ -45,7 +58,7 @@ export default function MyCourse() {
           </tr>
         </thead>
         <tbody className="">
-          {courses.map((course) => (
+          {myCourseData.map((course) => (
             <tr key={course._id} className="  dark:bg-gray-800 ">
               <td
                 scope="row"
@@ -75,7 +88,10 @@ export default function MyCourse() {
               </td>
               <td className="px-6 py-4 text-right">
                 <button
-                  //   onClick={() => handleDelete(course._id)}
+                  onClick={() => {
+                    setSubmitId(course._id);
+                    window.my_modal_3.showModal();
+                  }}
                   className="bg-red-500 py-1 px-3 rounded text-black"
                 >
                   Denied
@@ -85,6 +101,29 @@ export default function MyCourse() {
           ))}
         </tbody>
       </table>
+
+      <dialog id="my_modal_3" className="modal">
+        <form method="dialog" className="modal-box">
+          <button
+            htmlFor="my-modal-3"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <h3 className="font-bold text-lg">Feedback!</h3>
+          <textarea
+            required
+            className="textarea w-full border-2 border-gray-300 my-2"
+            placeholder="Bio"
+          ></textarea>
+          <button
+            onClick={() => handleSubmit(submitId)}
+            className="bg-yellow-500 px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </form>
+      </dialog>
     </div>
   );
 }
