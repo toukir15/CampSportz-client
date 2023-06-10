@@ -4,7 +4,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 20,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"
@@ -14,7 +14,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 18,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"
@@ -24,7 +24,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 15,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"
@@ -34,7 +34,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 22,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"
@@ -44,7 +44,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 17,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"
@@ -54,7 +54,7 @@
         "instructor_name": "Alex",
         "available_seats": 10,
         "price": 99.99,
-        "student_quantity": 19,
+        "enrolled_students": 0,
         "image": "https://cdn.pixabay.com/photo/2022/03/08/15/44/boy-7056003_1280.jpg",
         "category": "Football",
         "status": "approved"

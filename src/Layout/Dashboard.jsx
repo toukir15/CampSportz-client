@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 
 export default function Dashboard() {
+  const role = "use";
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -18,6 +19,7 @@ export default function Dashboard() {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
+
           <Link to="/dashboard/selected">
             <li>
               <a>Selected Courses</a>
@@ -28,7 +30,7 @@ export default function Dashboard() {
               <a>Enrolled Courses</a>
             </li>
           </Link>
-          <hr />
+
           <Link to="/dashboard/addcourse">
             <li>
               <a>Add a Class</a>
@@ -39,11 +41,24 @@ export default function Dashboard() {
               <a>My Course</a>
             </li>
           </Link>
+          <Link to="/dashboard/managecourses">
+            <li>
+              <a>Manage Courses</a>
+            </li>
+          </Link>
+          <Link to="/dashboard/manageusers">
+            <li>
+              <a>Manage Users</a>
+            </li>
+          </Link>
+
           <Link to="/">
             <li>
               <a>home</a>
             </li>
           </Link>
+
+          <hr />
         </ul>
       </div>
     </div>

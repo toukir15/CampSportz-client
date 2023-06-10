@@ -17,6 +17,8 @@ export default function SignUp() {
         const user = {
           name: result.user.displayName,
           email: result.user.email,
+          image: result.user.photoURL,
+          role: "user",
         };
         //make user api
         fetch("http://localhost:5000/users", {

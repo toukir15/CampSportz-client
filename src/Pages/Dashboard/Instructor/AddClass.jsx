@@ -28,6 +28,7 @@ export default function AddClass() {
       price: data.price,
       available_seats: data.seats,
       status: "pending",
+      enrolled_students: 0,
     };
     fetch("http://localhost:5000/courses", {
       method: "POST",

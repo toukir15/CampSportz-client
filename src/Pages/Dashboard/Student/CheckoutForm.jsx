@@ -11,9 +11,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  console.log(selectedCourses);
-
-  // console.log("selectcourses chckout", selectedCourses);
+  // console.log(selectedCourses);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -81,9 +79,9 @@ export default function CheckoutForm({ price, selectedCourses }) {
       );
       const coursesId = await selectedCourses.map((course) => course._id);
       const selectedCoursesId = await selectedCourses.map(
-        (course) => course._id
+        (course) => course.course_id
       );
-      console.log(coursesName, coursesId);
+      console.log(selectedCoursesId, coursesId);
 
       const payment = {
         email: user?.email,

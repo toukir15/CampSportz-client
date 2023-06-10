@@ -4,16 +4,8 @@ import Swal from "sweetalert2";
 // import { AiTwotoneStar } from "react-icons/md";
 
 export default function SingleCourse({ courseData }) {
-  const {
-    image,
-    student_quantity,
-    price,
-    available_seat,
-    instructor_name,
-    course_name,
-    category,
-    course_id,
-  } = courseData;
+  const { image, price, course_name, category, _id: course_id } = courseData;
+  console.log(course_id);
 
   //  handle selected course
   const handleSelectCourse = () => {

@@ -27,13 +27,14 @@ export default function SelectedCourses() {
       });
   };
   const total = selectedCourses.reduce((sum, course) => course.price + sum, 0);
+  const totalPrice = total.toFixed(2);
 
   return (
     <div className="relative overflow-x-auto w-full px-8">
       <div className="mb-8 flex w-full justify-between">
         <p className="w-[1px]"></p>
         <p className=" text-2xl font-medium md:ml-80 ">
-          Total Price: ${total && total?.toFixed(2)}
+          Total Price: ${totalPrice ? totalPrice : "00"}
         </p>
         <Link to="/dashboard/payment">
           <button className="mr-6 px-6 py-2 bg-black text-md font-medium rounded  text-[#F7FF62]">

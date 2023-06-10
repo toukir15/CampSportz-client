@@ -2,34 +2,34 @@ import { useState } from "react";
 import useMyCourse from "../../../components/Hooks/useMyCourse";
 
 export default function MyCourse() {
-  const [myCourseData, refetch] = useMyCourse();
+  const [myCourseData] = useMyCourse();
   const [submitId, setSubmitId] = useState("");
   console.log(submitId);
 
   // handle pending status
-  const handlePending = (id) => {
-    console.log(id);
-    setSubmitId(id);
-    fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          refetch();
-        }
-      });
-  };
+  //   const handlePending = (id) => {
+  //     console.log(id);
+  //     setSubmitId(id);
+  //     fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //         if (data.modifiedCount > 0) {
+  //           refetch();
+  //         }
+  //       });
+  //   };
 
-  const handleSubmit = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          refetch();
-        }
-      });
-  };
+  //   const handleSubmit = (id) => {
+  //     console.log(id);
+  //     fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.deletedCount > 0) {
+  //           refetch();
+  //         }
+  //       });
+  //   };
 
   return (
     <div className="w-full">
@@ -80,14 +80,14 @@ export default function MyCourse() {
               <td className="px-6 py-4  ">{course.price}</td>
               <td className="px-6 py-4 text-right">
                 <button
-                  onClick={() => handlePending(course._id)}
+                  //   onClick={() => handlePending(course._id)}
                   className="bg-green-500 py-1 px-3 rounded text-black"
                 >
                   {course.status}
                 </button>
               </td>
               <td className="px-6 py-4 text-right">
-                <button
+                {/* <button
                   onClick={() => {
                     setSubmitId(course._id);
                     window.my_modal_3.showModal();
@@ -95,7 +95,7 @@ export default function MyCourse() {
                   className="bg-red-500 py-1 px-3 rounded text-black"
                 >
                   Denied
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}
