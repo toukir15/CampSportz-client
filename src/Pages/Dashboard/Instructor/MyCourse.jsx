@@ -3,8 +3,6 @@ import useMyCourse from "../../../components/Hooks/useMyCourse";
 
 export default function MyCourse() {
   const [myCourseData] = useMyCourse();
-  const [submitId, setSubmitId] = useState("");
-  console.log(submitId);
 
   // handle pending status
   //   const handlePending = (id) => {

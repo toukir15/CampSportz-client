@@ -9,10 +9,10 @@ const stripePromise = loadStripe(
 export default function Payment() {
   const [selectedCourses] = useSelectedCourses();
   const total = selectedCourses.reduce((sum, course) => course.price + sum, 0);
-  const price = parseFloat(total.toFixed(2));
+  // const price = parseFloat(total.toFixed(2));
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm selectedCourses={selectedCourses} price={price} />
+      <CheckoutForm selectedCourses={selectedCourses} price={total} />
     </Elements>
   );
 }
