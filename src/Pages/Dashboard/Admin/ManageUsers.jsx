@@ -1,9 +1,7 @@
 import useUsers from "../../../components/Hooks/useUsers";
 
 export default function ManageUsers() {
-  // const [users, setUsers] = useState([]);
   const [users, refetch] = useUsers();
-  console.log(users);
 
   const handleMakeAdmin = (role, id) => {
     const roleObj = { role };

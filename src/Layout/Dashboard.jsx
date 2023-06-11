@@ -1,7 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
+import useUsers from "../components/Hooks/useUsers";
 
 export default function Dashboard() {
-  const role = "use";
+  const [users] = useUsers();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -30,7 +31,6 @@ export default function Dashboard() {
               <a>Enrolled Courses</a>
             </li>
           </Link>
-
           <Link to="/dashboard/addcourse">
             <li>
               <a>Add a Class</a>

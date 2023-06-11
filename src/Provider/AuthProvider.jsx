@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -55,8 +56,18 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true);
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
+
+      if (currentUser?.email) {
+        axios
+          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .then((data) => {
+            localStorage.setItem("access-token", data.data.token);
+          })
+          .catch((error) => console.log(error));
+      } else {
+        localStorage.removeItem("access-token");
+      }
       setLoading(false);
     });
     return () => unSubscribe();

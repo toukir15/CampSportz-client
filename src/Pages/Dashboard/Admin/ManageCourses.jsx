@@ -39,6 +39,16 @@ export default function ManageCourses() {
           refetch();
         }
       });
+    
+      fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          refetch();
+        }
+      });
+    
     const modal = document.getElementById("my_modal_3");
     modal.close();
   };
