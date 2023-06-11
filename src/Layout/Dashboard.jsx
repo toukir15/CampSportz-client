@@ -1,8 +1,25 @@
 import { Link, Outlet } from "react-router-dom";
-import useUsers from "../components/Hooks/useUsers";
+// import useUsers from "../components/Hooks/useUsers";
+import useAdmin from "../components/Hooks/useAdmin";
+import useInstructor from "../components/Hooks/useInstructor";
 
 export default function Dashboard() {
-  const [users] = useUsers();
+  const [isInstructor] = useInstructor();
+  const [isAdmin] = useAdmin();
+
+  if (!isAdmin) {
+    return <p>loading...</p>;
+  }
+
+  if (!isInstructor) {
+    return <p>loading...</p>;
+  }
+  console.log(isAdmin);
+  console.log(isInstructor);
+
+  // const isAdminn = true;
+  // const isInstructorr = false;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -21,36 +38,52 @@ export default function Dashboard() {
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
 
-          <Link to="/dashboard/selected">
-            <li>
-              <a>Selected Courses</a>
-            </li>
-          </Link>
-          <Link to="/dashboard/enrolled">
-            <li>
-              <a>Enrolled Courses</a>
-            </li>
-          </Link>
-          <Link to="/dashboard/addcourse">
-            <li>
-              <a>Add a Class</a>
-            </li>
-          </Link>
-          <Link to="/dashboard/mycourse">
-            <li>
-              <a>My Course</a>
-            </li>
-          </Link>
-          <Link to="/dashboard/managecourses">
-            <li>
-              <a>Manage Courses</a>
-            </li>
-          </Link>
-          <Link to="/dashboard/manageusers">
-            <li>
-              <a>Manage Users</a>
-            </li>
-          </Link>
+          {!isInstructor?.isInstructor ||
+            !isInstructor.role === "Instructor" ||
+            ((!isAdmin?.isAdmin || !isAdmin.role === "Admin") && (
+              <>
+                <Link to="/dashboard/selected">
+                  <li>
+                    <a>Selected Courses</a>
+                  </li>
+                </Link>
+                <Link to="/dashboard/enrolled">
+                  <li>
+                    <a>Enrolled Courses</a>
+                  </li>
+                </Link>
+              </>
+            ))}
+          {isInstructor?.isInstructor ||
+            (isInstructor.role === "Instructor" && (
+              <>
+                <Link to="/dashboard/addcourse">
+                  <li>
+                    <a>Add a Class</a>
+                  </li>
+                </Link>
+                <Link to="/dashboard/mycourse">
+                  <li>
+                    <a>My Course</a>
+                  </li>
+                </Link>
+              </>
+            ))}
+          {isAdmin?.isAdmin ||
+            (isAdmin.role === "Admin" && (
+              <>
+                <Link to="/dashboard/managecourses">
+                  <li>
+                    <a>Manage Courses</a>
+                  </li>
+                </Link>
+                <Link to="/dashboard/manageusers">
+                  <li>
+                    <a>Manage Users</a>
+                  </li>
+                </Link>
+              </>
+            ))}
 
           <Link to="/">
             <li>

@@ -1,14 +1,19 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  // const form =
   const [error, setError] = useState("");
-  const { createUser, googleSignIn, updateUserProfile } =
+  const { createUser, googleSignIn, updateUserProfile, loading } =
     useContext(AuthContext);
+  console.log(loading);
 
   // google sign in
   const handleGoogleSignIn = () => {
@@ -18,7 +23,7 @@ export default function SignUp() {
           name: result.user.displayName,
           email: result.user.email,
           image: result.user.photoURL,
-          role: "user",
+          role: "User",
         };
         //make user api
         fetch("http://localhost:5000/users", {
@@ -28,15 +33,18 @@ export default function SignUp() {
           },
           body: JSON.stringify(user),
         });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         setError(error.message);
       });
   };
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -47,6 +55,7 @@ export default function SignUp() {
     const formData = new FormData();
     formData.append("image", imageData);
     // console.log(imageData);
+    reset();
 
     fetch(
       `https://api.imgbb.com/1/upload?key=${
@@ -70,7 +79,7 @@ export default function SignUp() {
             updateUserProfile(name, data.data.display_url)
               .then(() => {
                 //make users api
-                const user = { name, email };
+                const user = { name, email, role: "User" };
                 fetch("http://localhost:5000/users", {
                   method: "POST",
                   headers: {
@@ -172,7 +181,13 @@ export default function SignUp() {
               type="submit"
               className="bg-rose-500 w-full rounded-md py-3 text-white"
             >
-              Continue
+              {loading ? (
+                <p className="">
+                  <TbFidgetSpinner className="animate-spin m-auto" size="24" />
+                </p>
+              ) : (
+                "Continue"
+              )}
             </button>
             {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
           </div>

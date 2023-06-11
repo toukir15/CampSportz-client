@@ -13,17 +13,42 @@ export default function Login() {
   const from = location?.state?.from?.pathname || "/";
 
   // google sign in
+  // const handleGoogleSignIn = () => {
+  //   googleSignIn()
+  //     .then((result) => {
+  //       console.log(result.user);
+  //       navigate(from);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setError(error.message);
+  //     });
+  // };
+  // google sign in
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user);
-        navigate(from);
+        const user = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+          role: "user",
+        };
+        //make user api
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
       })
       .catch((error) => {
         console.log(error);
         setError(error.message);
       });
   };
+
   const {
     register,
     handleSubmit,
