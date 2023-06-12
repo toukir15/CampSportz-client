@@ -20,6 +20,12 @@ export default function Dashboard() {
   // const isAdminn = true;
   // const isInstructorr = false;
 
+  const notAdmin = !isAdmin?.isAdmin || !isAdmin.role === "Admin";
+  const notInstructor =
+    !isInstructor?.isInstructor || !isInstructor.role === "Instructor";
+
+  console.log(notAdmin, notInstructor);
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -38,22 +44,21 @@ export default function Dashboard() {
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
 
-          {!isInstructor?.isInstructor ||
-            !isInstructor.role === "Instructor" ||
-            ((!isAdmin?.isAdmin || !isAdmin.role === "Admin") && (
-              <>
-                <Link to="/dashboard/selected">
-                  <li>
-                    <a>Selected Courses</a>
-                  </li>
-                </Link>
-                <Link to="/dashboard/enrolled">
-                  <li>
-                    <a>Enrolled Courses</a>
-                  </li>
-                </Link>
-              </>
-            ))}
+          {(notAdmin || notInstructor) && (
+            <>
+              <Link to="/dashboard/selected">
+                <li>
+                  <a>Selected Courses</a>
+                </li>
+              </Link>
+              <Link to="/dashboard/enrolled">
+                <li>
+                  <a>Enrolled Courses</a>
+                </li>
+              </Link>
+            </>
+          )}
+
           {isInstructor?.isInstructor ||
             (isInstructor.role === "Instructor" && (
               <>

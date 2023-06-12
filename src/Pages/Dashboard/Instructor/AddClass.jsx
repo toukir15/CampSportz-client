@@ -21,6 +21,7 @@ export default function AddClass() {
     console.log(data);
 
     const courseInfo = {
+      image: data.url,
       course_name: data.courseName,
       instructor_name: data.instructorName,
       instructor_email: data.instructorEmail,

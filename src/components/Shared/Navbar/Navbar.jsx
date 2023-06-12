@@ -14,8 +14,15 @@ export default function Navbar() {
     <div className="border-b-2">
       <Container>
         <div className="navbar bg-base-100">
+          <div>
+            <img
+              className="w-[80px] h-[80px] object-cover"
+              src="https://www.logodesign.net/logo/abstract-acrobat-man-and-woman-3709ld.png?nwm=1&nws=1&industry=sports-fitness&sf="
+              alt=""
+            />
+          </div>
           <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+            <a className="btn btn-ghost normal-case text-xl">CampSportz</a>
           </div>
           <ul className="flex gap-8 font-medium">
             <NavLink
@@ -30,9 +37,11 @@ export default function Navbar() {
             <NavLink to="/courses">
               <li>Courses</li>
             </NavLink>
-            <NavLink to="/dashboard">
-              <li>Dashboard</li>
-            </NavLink>
+            {user && (
+              <NavLink to="/dashboard">
+                <li>Dashboard</li>
+              </NavLink>
+            )}
           </ul>
           <div className="flex-none">
             <div className="dropdown dropdown-end"></div>

@@ -1,16 +1,46 @@
+import { useContext } from "react";
 import { AiOutlineBarChart, AiTwotoneStar } from "react-icons/ai";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { Link } from "react-router-dom";
+import useUsers from "../../components/Hooks/useUsers";
+import useInstructor from "../../components/Hooks/useInstructor";
+import useAdmin from "../../components/Hooks/useAdmin";
 // import { AiTwotoneStar } from "react-icons/md";
 
 export default function SingleCourse({ courseData }) {
-  const { image, price, course_name, category, _id: course_id } = courseData;
-  console.log(course_id);
+  const { user } = useContext(AuthContext);
+  const [isInstructor] = useInstructor();
+  const [isAdmin] = useAdmin();
+
+  console.log(isInstructor);
+  console.log(isAdmin);
+  const {
+    image,
+    price,
+    course_name,
+    category,
+    _id: course_id,
+    available_seats,
+  } = courseData;
+  // console.log(course_id);
+  console.log(courseData);
+  const conditionalBtn =
+    available_seats === 0 ||
+    isAdmin?.role === "Admin" ||
+    isInstructor?.role === "Instructor";
 
   //  handle selected course
   const handleSelectCourse = () => {
     console.log(price);
-    const courseData = { course_id, course_name, price, category, image };
+    const courseData = {
+      course_id,
+      course_name,
+      price: parseFloat(price),
+      category,
+      image,
+    };
     fetch("http://localhost:5000/selectCourses", {
       method: "POST",
       headers: {
@@ -34,47 +64,64 @@ export default function SingleCourse({ courseData }) {
   };
 
   return (
-    <div>
-      <div>
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-4">
-            <a href="#">
-              <img className="rounded-lg" src={image} alt="" />
-            </a>
+    <div
+      className={`max-w-sm ${
+        available_seats === 0 ? "bg-red-100" : "bg-white"
+      }  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12`}
+    >
+      <div className="p-4">
+        <a href="#">
+          <img className="rounded-lg" src={image} alt="" />
+        </a>
+      </div>
+      <div className="pb-4 px-4">
+        <div className="flex justify-between px-6">
+          <p className="bg-gray-100 px-4 py-1 rounded">{category}</p>
+          {price === "Free" ? (
+            <p className="text-2xl font-bold">Free</p>
+          ) : (
+            <p className="text-2xl font-bold">${price}</p>
+          )}
+        </div>
+        <div className="flex justify-between my-2">
+          <div className="flex items-center gap-1">
+            <AiOutlineBarChart className="text-yellow-500" />
+            <p>Beginner</p>
           </div>
-          <div className="pb-4 px-4">
-            <div className="flex justify-between px-6">
-              <p className="bg-gray-100 px-4 py-1 rounded">{category}</p>
-              {price === "Free" ? (
-                <p className="text-2xl font-bold">Free</p>
-              ) : (
-                <p className="text-2xl font-bold">${price}</p>
-              )}
-            </div>
-            <div className="flex justify-between my-2">
-              <div className="flex items-center gap-1">
-                <AiOutlineBarChart className="text-yellow-500" />
-                <p>Beginner</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <MdOutlineAccessTimeFilled className="text-yellow-500" />
-                <p>120 Hours</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <AiTwotoneStar className="text-yellow-500" />
-                <p>3.5 (3k reviews)</p>
-              </div>
-            </div>
-            <p className="text-2xl font-medium mb-2">{course_name}</p>
-            <div className="flex justify-end ">
-              <button
-                onClick={handleSelectCourse}
-                className="bg-black text-[#F7FF62] py-2 px-4 rounded text-md font-medium"
-              >
-                Select Course
+          <div className="flex items-center gap-1">
+            <MdOutlineAccessTimeFilled className="text-yellow-500" />
+            <p>120 Hours</p>
+          </div>
+          <div className="flex items-center gap-1">
+            <AiTwotoneStar className="text-yellow-500" />
+            <p>3.5 (3k reviews)</p>
+          </div>
+        </div>
+        <p className="text-2xl font-medium mb-2">{course_name}</p>
+        <div className="flex justify-end ">
+          {user ? (
+            <button
+              onClick={handleSelectCourse}
+              className={`${
+                conditionalBtn ? "bg-gray-400" : "text-[#F7FF62]"
+              } bg-black  py-2 px-4 rounded text-md font-medium`}
+              disabled={conditionalBtn}
+            >
+              Select Course
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="bg-black text-[#F7FF62] py-2 px-4 rounded text-md font-medium">
+                Login first then you select
               </button>
-            </div>
-          </div>
+            </Link>
+          )}
+          {/* <button
+            onClick={handleSelectCourse}
+            className="bg-black text-[#F7FF62] py-2 px-4 rounded text-md font-medium"
+          >
+            Select Course
+          </button> */}
         </div>
       </div>
     </div>

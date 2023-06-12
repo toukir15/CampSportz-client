@@ -9,9 +9,8 @@ export default function SignUp() {
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
-  // const form =
   const [error, setError] = useState("");
-  const { createUser, googleSignIn, updateUserProfile, loading } =
+  const { user, createUser, googleSignIn, updateUserProfile, loading } =
     useContext(AuthContext);
   console.log(loading);
 
@@ -49,7 +48,12 @@ export default function SignUp() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const { name, email, password } = data;
+    const { name, email, password, confirm } = data;
+
+    if (password !== confirm) {
+      setError("don't match password");
+      return;
+    }
 
     const imageData = data.image[0];
     const formData = new FormData();
@@ -103,7 +107,7 @@ export default function SignUp() {
   };
   //   console.log(errors);
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
@@ -165,10 +169,31 @@ export default function SignUp() {
                 </label>
               </div>
               <input
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                })}
                 type="password"
                 name="password"
                 id="password"
+                required
+                placeholder="*******"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+              />
+            </div>
+            <div>
+              <div className="flex justify-between">
+                <label htmlFor="password" className="text-sm mb-2">
+                  Confirm Password
+                </label>
+              </div>
+              <input
+                {...register("confirm", { required: true })}
+                type="password"
+                name="confirm"
+                id="confirm"
                 required
                 placeholder="*******"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
@@ -178,6 +203,7 @@ export default function SignUp() {
 
           <div>
             <button
+              disabled={user}
               type="submit"
               className="bg-rose-500 w-full rounded-md py-3 text-white"
             >
@@ -189,7 +215,19 @@ export default function SignUp() {
                 "Continue"
               )}
             </button>
-            {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
+
+            {/* error message  */}
+            <div className="mt-2">
+              {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600">Password must be 6 characters</p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-600">
+                  Password must have one uppercase and one special character
+                </p>
+              )}
+            </div>
           </div>
         </form>
         <div className="flex items-center pt-4 space-x-1">

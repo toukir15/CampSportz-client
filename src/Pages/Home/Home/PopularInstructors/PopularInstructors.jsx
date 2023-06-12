@@ -16,7 +16,7 @@ export default function PopularInstructors() {
       .then((data) => setInstructors(data));
   }, []);
   return (
-    <div>
+    <div className="mb-8">
       <SectionTitle heading={"Popular Instructors"}></SectionTitle>
 
       <div className="">
@@ -31,7 +31,15 @@ export default function PopularInstructors() {
         >
           {instructors.map((instructor, index) => (
             <SwiperSlide key={index}>
-              <img src={instructor.image} alt="" />
+              <div className="relative">
+                <div className="hover:bg-slate-300 bg-transparent">
+                  <img src={instructor.image} alt="" />
+                </div>
+                <div className="bg-red-100 absolute top-0 bottom-0 w-full flex items-center flex-col justify-center">
+                  <h3 className="text-2xl font-medium">{instructor.name}</h3>
+                  <p>{instructor.email}</p>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
