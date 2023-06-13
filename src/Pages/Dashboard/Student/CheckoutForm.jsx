@@ -65,6 +65,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
           },
         },
       });
+
     if (confirmError) {
       console.log(confirmError);
     }
@@ -81,9 +82,9 @@ export default function CheckoutForm({ price, selectedCourses }) {
       const selectedCoursesId = await selectedCourses.map(
         (course) => course.course_id
       );
-      console.log(selectedCoursesId, coursesId);
+      // console.log(selectedCoursesId, coursesId); 
 
-      const payment = {
+      const paymentHistory = {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
@@ -94,11 +95,28 @@ export default function CheckoutForm({ price, selectedCourses }) {
         orderStatus: "pending",
         courses_name: coursesName,
       };
-      console.log(payment);
+
+      const payment = {
+        selected_courses_id: selectedCoursesId,
+      };
+      // payment
       fetch("http://localhost:5000/payments", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+        },
         body: JSON.stringify(payment),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+
+      // payment history
+      fetch("http://localhost:5000/paymentsHistory", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(paymentHistory),
       })
         .then((res) => res.json())
         .then((data) => console.log(data));

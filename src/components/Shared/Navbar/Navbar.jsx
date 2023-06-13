@@ -22,9 +22,11 @@ export default function Navbar() {
             />
           </div>
           <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl">CampSportz</a>
+            <a className="btn btn-ghost normal-case hidden md:block text-xl">
+              CampSportz
+            </a>
           </div>
-          <ul className="flex gap-8 font-medium">
+          <ul className="lg:flex gap-8 font-medium mr-4">
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "text-pink-500" : "")}

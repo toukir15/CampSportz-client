@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import useSelectedCourses from "../../../components/Hooks/useSelectedCourses";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 export default function SelectedCourses() {
   const [selectedCourses, refetch] = useSelectedCourses();
   // console.log(selectedCourses);
+  // const [total, setTotal] = useState("");
 
   // handle delete
   const handleDelete = (id) => {
@@ -26,16 +28,19 @@ export default function SelectedCourses() {
         }
       });
   };
-  const total = selectedCourses.reduce((sum, course) => course.price + sum, 0);
-  const totalPrice = total.toFixed(2);
-  console.log(totalPrice);
+  const total = selectedCourses?.reduce((sum, course) => course.price + sum, 0);
+
+  // if (selectedCourses) {
+  // const totalPrice = Math.floor(total);
+  // setTotal(totalPrice);
+  // }
 
   return (
     <div className="relative overflow-x-auto w-full px-8">
       <div className="mb-8 flex w-full justify-between">
         <p className="w-[1px]"></p>
         <p className=" text-2xl font-medium md:ml-80 ">
-          Total Price: ${totalPrice ? totalPrice : "00"}
+          Total Price: ${Math.floor(total)}
         </p>
         <Link to="/dashboard/payment">
           <button className="mr-6 px-6 py-2 bg-black text-md font-medium rounded  text-[#F7FF62]">

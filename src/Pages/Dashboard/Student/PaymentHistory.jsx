@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-export default function EnrolledCourses() {
+export default function PaymentHistory() {
   const [payments, setPayments] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/payments")
+    fetch("http://localhost:5000/paymentsHistory")
       .then((res) => res.json())
       .then((data) => setPayments(data));
   }, []);

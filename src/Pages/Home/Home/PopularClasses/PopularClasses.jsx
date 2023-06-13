@@ -14,7 +14,7 @@ export default function PopularClasses() {
     <div>
       <SectionTitle heading={"Popular Classes"} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
         {classesData.slice(0, 6).map((classData) => (
           <SingleClass key={classData.class_id} classData={classData} />
         ))}

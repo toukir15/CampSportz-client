@@ -13,18 +13,6 @@ export default function Login() {
   const from = location?.state?.from?.pathname || "/";
 
   // google sign in
-  // const handleGoogleSignIn = () => {
-  //   googleSignIn()
-  //     .then((result) => {
-  //       console.log(result.user);
-  //       navigate(from);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setError(error.message);
-  //     });
-  // };
-  // google sign in
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
@@ -34,6 +22,7 @@ export default function Login() {
           image: result.user.photoURL,
           role: "user",
         };
+        navigate("/"  );
         //make user api
         fetch("http://localhost:5000/users", {
           method: "POST",

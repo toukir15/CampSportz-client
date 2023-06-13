@@ -1,102 +1,114 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 // import useUsers from "../components/Hooks/useUsers";
 import useAdmin from "../components/Hooks/useAdmin";
 import useInstructor from "../components/Hooks/useInstructor";
+import useStudent from "../components/Hooks/useStudents";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { GrCompliance, GrUserManager } from "react-icons/gr";
+import { MdOutlineGolfCourse, MdOutlineManageSearch } from "react-icons/md";
+import { HiOutlineHome } from "react-icons/hi";
+import { AiOutlineInsertRowAbove } from "react-icons/ai";
+import { BiAddToQueue, BiSelectMultiple } from "react-icons/bi";
+import { BsClockHistory } from "react-icons/bs";
+import { SiCountingworkspro } from "react-icons/si";
 
 export default function Dashboard() {
   const [isInstructor] = useInstructor();
   const [isAdmin] = useAdmin();
-
-  if (!isAdmin) {
-    return <p>loading...</p>;
-  }
-
-  if (!isInstructor) {
-    return <p>loading...</p>;
-  }
-  console.log(isAdmin);
-  console.log(isInstructor);
-
-  // const isAdminn = true;
-  // const isInstructorr = false;
-
-  const notAdmin = !isAdmin?.isAdmin || !isAdmin.role === "Admin";
-  const notInstructor =
-    !isInstructor?.isInstructor || !isInstructor.role === "Instructor";
-
-  console.log(notAdmin, notInstructor);
+  const [isStudent] = useStudent();
 
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open relative">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* Page content here */}
         <Outlet />
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className=" drawer-button lg:hidden absolute top-3 right-3"
         >
-          Open drawer
+          <AiOutlineMenuUnfold></AiOutlineMenuUnfold>
         </label>
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content  font-medium">
           {/* Sidebar content here */}
 
-          {(notAdmin || notInstructor) && (
-            <>
-              <Link to="/dashboard/selected">
+          {isStudent?.isStudent ||
+            (isStudent?.role === "User" && (
+              <>
                 <li>
-                  <a>Selected Courses</a>
+                  <NavLink to="/dashboard/selected">
+                    <BiSelectMultiple size="20" /> <a>Selected Courses</a>
+                  </NavLink>
                 </li>
-              </Link>
-              <Link to="/dashboard/enrolled">
+
                 <li>
-                  <a>Enrolled Courses</a>
+                  <NavLink to="/dashboard/enrolled">
+                    <GrCompliance size="20" /> <a>Enrolled Courses</a>
+                  </NavLink>
                 </li>
-              </Link>
-            </>
-          )}
+
+                <li>
+                  <NavLink to="/dashboard/paymentHistory">
+                    <BsClockHistory size="20" /> <a>Payment History</a>
+                  </NavLink>
+                </li>
+              </>
+            ))}
 
           {isInstructor?.isInstructor ||
-            (isInstructor.role === "Instructor" && (
+            (isInstructor?.role === "Instructor" && (
               <>
-                <Link to="/dashboard/addcourse">
-                  <li>
-                    <a>Add a Class</a>
-                  </li>
-                </Link>
-                <Link to="/dashboard/mycourse">
-                  <li>
-                    <a>My Course</a>
-                  </li>
-                </Link>
+                <li>
+                  <NavLink to="/dashboard/addcourse">
+                    <BiAddToQueue size={20} /> <a>Add a Class</a>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/mycourse">
+                    <SiCountingworkspro size={20} /> <a>My Course</a>
+                  </NavLink>
+                </li>
               </>
             ))}
           {isAdmin?.isAdmin ||
-            (isAdmin.role === "Admin" && (
+            (isAdmin?.role === "Admin" && (
               <>
-                <Link to="/dashboard/managecourses">
-                  <li>
-                    <a>Manage Courses</a>
-                  </li>
-                </Link>
-                <Link to="/dashboard/manageusers">
-                  <li>
-                    <a>Manage Users</a>
-                  </li>
-                </Link>
+                <li>
+                  <NavLink to="/dashboard/managecourses">
+                    <MdOutlineManageSearch size={22} /> <a>Manage Courses</a>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/manageusers">
+                    <GrUserManager size={20} /> <a>Manage Users</a>
+                  </NavLink>
+                </li>
               </>
             ))}
+          <hr className="my-4" />
 
-          <Link to="/">
-            <li>
-              <a>home</a>
-            </li>
-          </Link>
+          <li>
+            <NavLink to="/">
+              <HiOutlineHome size="20" /> <a>Home</a>
+            </NavLink>
+          </li>
 
-          <hr />
+          <li>
+            <NavLink to="/instructors">
+              <AiOutlineInsertRowAbove size="20" /> <a>Instructor</a>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/courses">
+              <MdOutlineGolfCourse size="20" /> <a>Courses</a>
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>
