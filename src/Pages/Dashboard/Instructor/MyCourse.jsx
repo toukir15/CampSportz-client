@@ -1,36 +1,13 @@
 import { useState } from "react";
 import useMyCourse from "../../../components/Hooks/useMyCourse";
+import SectionTitle from "../../../components/SectionTitle";
 
 export default function MyCourse() {
   const [myCourseData] = useMyCourse();
 
-  // handle pending status
-  //   const handlePending = (id) => {
-  //     console.log(id);
-  //     setSubmitId(id);
-  //     fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         if (data.modifiedCount > 0) {
-  //           refetch();
-  //         }
-  //       });
-  //   };
-
-  //   const handleSubmit = (id) => {
-  //     console.log(id);
-  //     fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         if (data.deletedCount > 0) {
-  //           refetch();
-  //         }
-  //       });
-  //   };
-
   return (
     <div className="w-full">
+      <SectionTitle heading={"My Courses"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
           <tr>

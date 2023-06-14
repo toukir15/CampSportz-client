@@ -1,11 +1,11 @@
 import useUsers from "../../../components/Hooks/useUsers";
+import SectionTitle from "../../../components/SectionTitle";
 
 export default function ManageUsers() {
   const [users, refetch] = useUsers();
 
   const handleMakeAdmin = (role, id) => {
     const roleObj = { role };
-    console.log(role, id);
     fetch(`http://localhost:5000/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -13,7 +13,6 @@ export default function ManageUsers() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           refetch();
         }
@@ -22,6 +21,7 @@ export default function ManageUsers() {
 
   return (
     <div className="w-full">
+      <SectionTitle heading={"Manage Users"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
           <tr>

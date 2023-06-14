@@ -42,34 +42,49 @@ export default function Navbar() {
               CampSportz
             </a>
           </div>
-          <ul className="lg:flex gap-8 font-medium mr-4">
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "")}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/instructors"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "")}
-            >
-              <li>Instructors</li>
-            </NavLink>
-            <NavLink
-              to="/courses"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "")}
-            >
-              <li>Courses</li>
-            </NavLink>
-            {user && (
+          <ul className=" gap-8 font-medium mr-4">
+            <li>
               <NavLink
-                to="/dashboard"
+                to="/"
                 className={({ isActive }) =>
                   isActive ? "text-yellow-500" : ""
                 }
               >
-                <li>Dashboard</li>
+                Home
               </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/instructors"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-500" : ""
+                }
+              >
+                Instructors
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/courses"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-500" : ""
+                }
+              >
+                Courses
+              </NavLink>
+            </li>
+            {user && (
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive ? "text-yellow-500" : ""
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </li>
             )}
           </ul>
           <div className="flex-none">

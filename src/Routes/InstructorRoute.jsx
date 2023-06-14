@@ -1,15 +1,12 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
 import useInstructor from "../components/Hooks/useInstructor";
 
 export default function InstructorRoute({ children }) {
-  const { loading, user } = useContext(AuthContext);
   const [isInstructor, isInstructorLoading] = useInstructor();
-  if (loading && isInstructorLoading) {
+  if (isInstructorLoading) {
     return <p>loading...</p>;
   }
-  if (user && isInstructor) {
+  if (isInstructor) {
     return children;
   }
 

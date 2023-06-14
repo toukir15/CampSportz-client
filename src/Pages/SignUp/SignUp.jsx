@@ -1,14 +1,12 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
+  // const location = useLocation();
   const [error, setError] = useState("");
   const { user, createUser, googleSignIn, updateUserProfile, loading } =
     useContext(AuthContext);
@@ -35,7 +33,6 @@ export default function SignUp() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
       });
   };
@@ -47,7 +44,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     const { name, email, password, confirm } = data;
 
     if (password !== confirm) {
@@ -58,7 +54,6 @@ export default function SignUp() {
     const imageData = data.image[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    // console.log(imageData);
     reset();
 
     fetch(
@@ -72,8 +67,6 @@ export default function SignUp() {
     )
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data.data.display_url);
-
         // create user with email and password
         createUser(email, password)
           .then((result) => {
@@ -100,18 +93,16 @@ export default function SignUp() {
               });
           })
           .catch((error) => {
-            console.log(error);
             setError(error.message);
           });
       });
   };
-  //   console.log(errors);
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-gray-400">Welcome to AirCNC</p>
+          <p className="text-sm text-gray-400">Welcome to CampSports</p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -205,15 +196,16 @@ export default function SignUp() {
             <button
               disabled={user}
               type="submit"
-              className="bg-rose-500 w-full rounded-md py-3 text-white"
+              className="bg-yellow-500 w-full rounded-md py-3 text-white"
             >
-              {loading ? (
+              {/* {loading ? (
                 <p className="">
                   <TbFidgetSpinner className="animate-spin m-auto" size="24" />
                 </p>
               ) : (
                 "Continue"
-              )}
+              )} */}
+              Continue
             </button>
 
             {/* error message  */}
@@ -248,7 +240,7 @@ export default function SignUp() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-rose-500 text-gray-600"
+            className="hover:underline hover:text-yellow-500 text-gray-600"
           >
             Login
           </Link>

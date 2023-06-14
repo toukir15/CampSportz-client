@@ -9,6 +9,7 @@ import {
   MdOutlineDriveFileRenameOutline,
 } from "react-icons/md";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import SectionTitle from "../../../components/SectionTitle";
 
 export default function AddClass() {
   const { user } = useContext(AuthContext);
@@ -47,9 +48,7 @@ export default function AddClass() {
     <>
       <div className="container mx-auto ">
         <div className="flex justify-center ">
-          <h2 className="text-4xl font-medium flex justify-center pb-2 w-72 my-8 border-b-2">
-            Add a Course
-          </h2>
+          <SectionTitle heading={"Add a Course"} />
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="px-4">
           {/* {isError && (

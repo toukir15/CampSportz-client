@@ -4,7 +4,6 @@ import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
-import useUsers from "../../components/Hooks/useUsers";
 import useInstructor from "../../components/Hooks/useInstructor";
 import useAdmin from "../../components/Hooks/useAdmin";
 // import { AiTwotoneStar } from "react-icons/md";
@@ -14,8 +13,6 @@ export default function SingleCourse({ courseData }) {
   const [isInstructor] = useInstructor();
   const [isAdmin] = useAdmin();
 
-  console.log(isInstructor);
-  console.log(isAdmin);
   const {
     image,
     price,
@@ -24,8 +21,7 @@ export default function SingleCourse({ courseData }) {
     _id: course_id,
     available_seats,
   } = courseData;
-  // console.log(course_id);
-  console.log(courseData);
+
   const conditionalBtn =
     available_seats === 0 ||
     isAdmin?.role === "Admin" ||
@@ -33,7 +29,6 @@ export default function SingleCourse({ courseData }) {
 
   //  handle selected course
   const handleSelectCourse = () => {
-    console.log(price);
     const courseData = {
       course_id,
       course_name,
@@ -50,7 +45,6 @@ export default function SingleCourse({ courseData }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -111,9 +105,9 @@ export default function SingleCourse({ courseData }) {
             </button>
           ) : (
             <Link to="/login">
-              <button className="bg-black text-[#F7FF62] py-2 px-4 rounded text-md font-medium">
-                Login first then you select
-              </button>
+              <p className="border border-b-2 py-2 px-4 rounded text-md font-medium">
+                Login to Select
+              </p>
             </Link>
           )}
           {/* <button

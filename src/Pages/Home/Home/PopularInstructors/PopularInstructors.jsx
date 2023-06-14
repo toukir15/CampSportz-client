@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../../components/SectionTitle";
-import SingleInstructors from "./SingleInstructors";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,7 +10,7 @@ export default function PopularInstructors() {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("instructors.json")
+    fetch("http://localhost:5000/instructors")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
@@ -31,14 +30,14 @@ export default function PopularInstructors() {
         >
           {instructors.map((instructor, index) => (
             <SwiperSlide key={index}>
-              <div className="relative">
+              <div className="mb-12">
                 <div className="hover:bg-slate-300 bg-transparent">
                   <img src={instructor.image} alt="" />
                 </div>
-                <div className="bg-red-100 absolute top-0 bottom-0 w-full flex items-center flex-col justify-center">
+                {/* <div className="bg-red-100 w-full flex items-center flex-col justify-center">
                   <h3 className="text-2xl font-medium">{instructor.name}</h3>
                   <p>{instructor.email}</p>
-                </div>
+                </div> */}
               </div>
             </SwiperSlide>
           ))}

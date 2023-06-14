@@ -14,7 +14,6 @@ const useMyCourse = () => {
       return res.json();
     },
   });
-  console.log(myCourseData);
   return [myCourseData, refetch];
 };
 

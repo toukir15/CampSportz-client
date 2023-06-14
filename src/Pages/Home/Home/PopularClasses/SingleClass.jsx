@@ -3,7 +3,6 @@ import { MdOutlineAccessTimeFilled } from "react-icons/md";
 export default function SingleClass({ classData }) {
   const { image, category, price, course_name, enrolled_students } = classData;
 
-  // console.log(classData);
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12">
       <div className="p-4 relative">

@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import axios from "axios";
 // import "./CheckoutForm.css";
 
 export default function CheckoutForm({ price, selectedCourses }) {
@@ -11,7 +12,6 @@ export default function CheckoutForm({ price, selectedCourses }) {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  // console.log(selectedCourses);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -23,7 +23,6 @@ export default function CheckoutForm({ price, selectedCourses }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setClientSecret(data.clientSecret);
         });
     }
@@ -49,7 +48,6 @@ export default function CheckoutForm({ price, selectedCourses }) {
       card,
     });
     if (error) {
-      console.log(error);
       setError(error.message);
     } else {
       console.log(paymentMethod, "payment");
@@ -82,7 +80,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
       const selectedCoursesId = await selectedCourses.map(
         (course) => course.course_id
       );
-      // console.log(selectedCoursesId, coursesId); 
+      // console.log(selectedCoursesId, coursesId);
 
       const paymentHistory = {
         email: user?.email,

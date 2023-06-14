@@ -10,6 +10,5 @@ export default function useUsers() {
       return res.data;
     },
   });
-  // console.log(users);
   return [users, refetch];
 }

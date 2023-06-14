@@ -14,6 +14,5 @@ export default function useAdmin() {
       return res.data;
     },
   });
-  //   console.log(isAdmin);
   return [isAdmin, isAdminLoading];
 }

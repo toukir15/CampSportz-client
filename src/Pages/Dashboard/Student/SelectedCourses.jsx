@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useSelectedCourses from "../../../components/Hooks/useSelectedCourses";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import SectionTitle from "../../../components/SectionTitle";
 
 export default function SelectedCourses() {
   const [selectedCourses, refetch] = useSelectedCourses();
@@ -15,7 +16,6 @@ export default function SelectedCourses() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           Swal.fire({
             position: "top-end",
@@ -37,6 +37,7 @@ export default function SelectedCourses() {
 
   return (
     <div className="relative overflow-x-auto w-full px-8">
+      <SectionTitle heading={"Selected Courses"} />
       <div className="mb-8 flex w-full justify-between">
         <p className="w-[1px]"></p>
         <p className=" text-2xl font-medium md:ml-80 ">

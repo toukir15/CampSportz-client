@@ -4,7 +4,6 @@ import SingleClass from "./SingleClass";
 
 export default function PopularClasses() {
   const [classesData, setClassesData] = useState([]);
-  console.log(classesData);
   useEffect(() => {
     fetch("http://localhost:5000/courses")
       .then((res) => res.json())

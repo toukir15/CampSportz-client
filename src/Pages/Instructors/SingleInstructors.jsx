@@ -1,5 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
 import { MdAccessTimeFilled } from "react-icons/md";
+// import { motion } from "framer-motion";
+
 // import { IoTime } from "react-icons/io";
 export default function SingleInstructors({ instructor }) {
   const {
@@ -14,7 +16,7 @@ export default function SingleInstructors({ instructor }) {
     reviews,
   } = instructor;
   return (
-    <div>
+    <>
       <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="p-4">
           <a href="#">
@@ -48,6 +50,6 @@ export default function SingleInstructors({ instructor }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

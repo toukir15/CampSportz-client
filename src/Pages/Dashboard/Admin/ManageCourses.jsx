@@ -1,29 +1,16 @@
-import { useEffect, useState } from "react";
-import useMyCourse from "../../../components/Hooks/useMyCourse";
+import { useState } from "react";
 import useAllCourse from "../../../components/Hooks/useAllCourse";
-import { Form } from "react-hook-form";
+import SectionTitle from "../../../components/SectionTitle";
 
 export default function ManageCourses() {
-  //   const [courses, setCourses] = useState([]);
-  //   useEffect(() => {
-  //     fetch("http://localhost:5000/courses")
-  //       .then((res) => res.json())
-  //       .then((data) => setCourses(data));
-  //   }, []);
-  //   console.log(courses);
-
   const [allCourseData, refetch] = useAllCourse();
   const [submitId, setSubmitId] = useState("");
-  console.log(allCourseData);
 
   // handle pending status
   const handleApproved = (id) => {
-    console.log(id);
-    setSubmitId(id);
     fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           refetch();
         }
@@ -31,7 +18,6 @@ export default function ManageCourses() {
   };
 
   const handleSubmit = (id) => {
-    console.log(id);
     fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
       .then((res) => res.json())
       .then((data) => {
@@ -39,16 +25,15 @@ export default function ManageCourses() {
           refetch();
         }
       });
-    
-      fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+
+    fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           refetch();
         }
       });
-    
+
     const modal = document.getElementById("my_modal_3");
     modal.close();
   };
@@ -69,6 +54,7 @@ export default function ManageCourses() {
 
   return (
     <div className="w-full">
+      <SectionTitle heading={"Manage Courses"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
           <tr>
@@ -113,7 +99,7 @@ export default function ManageCourses() {
                 {course.course_name}
               </td>
               <td className="px-6 py-4">{course.category}</td>
-              <td className="px-6 py-4  ">{course.price}</td>
+              <td className="px-6 py-4  ">${course.price}</td>
               <td className="px-6 py-4 text-right">
                 <button
                   onClick={() => handleApproved(course._id)}

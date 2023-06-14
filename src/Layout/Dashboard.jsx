@@ -14,8 +14,12 @@ import { SiCountingworkspro } from "react-icons/si";
 
 export default function Dashboard() {
   const [isInstructor] = useInstructor();
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
   const [isStudent] = useStudent();
+
+  if (isAdminLoading) {
+    return <p>loading</p>;
+  }
 
   return (
     <div className="drawer lg:drawer-open relative">

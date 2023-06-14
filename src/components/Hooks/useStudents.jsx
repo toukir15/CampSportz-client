@@ -14,6 +14,5 @@ export default function useStudent() {
       return res.data;
     },
   });
-  //   console.log(isAdmin);
   return [isStudent, isStudentLoading];
 }

@@ -1,15 +1,12 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
 import useAdmin from "../components/Hooks/useAdmin";
 
 export default function AdminRoute({ children }) {
-  const { loading, user } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin();
-  if (loading && isAdminLoading) {
+  if (isAdminLoading) {
     return <p>loading...</p>;
   }
-  if (user && isAdmin) {
+  if (isAdmin) {
     return children;
   }
 

@@ -8,7 +8,6 @@ const useAllCourse = () => {
       return res.json();
     },
   });
-  console.log(allCourseData);
   return [allCourseData, refetch];
 };
 

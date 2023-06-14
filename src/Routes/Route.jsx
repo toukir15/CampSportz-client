@@ -20,6 +20,7 @@ import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
 import Enrolled from "../Pages/Dashboard/Student/Enrolled";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import PrivateRoute from "./PrivateRoute";
 // import Courses from "../Pages/Courses/Courses";
 // import Courses from "../Pages/Courses/Courses";
 
@@ -35,7 +36,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <Instructors />,
+        element: (
+          <PrivateRoute>
+            <Instructors />
+          </PrivateRoute>
+        ),
       },
       {
         path: "courses",
@@ -85,17 +90,17 @@ export const router = createBrowserRouter([
       {
         path: "addcourse",
         element: (
-          // <InstructorRoute>
-          <AddClass />
-          // {/* </InstructorRoute> */}
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
         ),
       },
       {
         path: "mycourse",
         element: (
-          // <InstructorRoute>
-          <MyCourse />
-          // </InstructorRoute>
+          <InstructorRoute>
+            <MyCourse />
+          </InstructorRoute>
         ),
       },
 

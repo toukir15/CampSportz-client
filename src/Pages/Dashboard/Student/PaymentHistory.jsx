@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
+import SectionTitle from "../../../components/SectionTitle";
+import axios from "axios";
 
 export default function PaymentHistory() {
   const [payments, setPayments] = useState([]);
+
   useEffect(() => {
-    fetch("http://localhost:5000/paymentsHistory")
-      .then((res) => res.json())
-      .then((data) => setPayments(data));
+    axios
+      .get("http://localhost:5000/paymentsHistory")
+      .then((response) => {
+        const data = response.data;
+        setPayments(data);
+      })
+      .catch((error) => {
+        console.error("Error retrieving data:", error);
+      });
   }, []);
   console.log(payments);
 
   return (
     <div>
+      <SectionTitle heading={"Payment History"}></SectionTitle>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
           <tr>
@@ -37,7 +47,7 @@ export default function PaymentHistory() {
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 <div className="grid gap-4">
-                  {payment.courses_name.map((name, index) => (
+                  {payment?.courses_name?.map((name, index) => (
                     <p key={index}>
                       {index + 1}. {name}
                     </p>

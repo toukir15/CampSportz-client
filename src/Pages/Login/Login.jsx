@@ -9,7 +9,6 @@ export default function Login() {
   const [error, setError] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
   const from = location?.state?.from?.pathname || "/";
 
   // google sign in
@@ -20,9 +19,9 @@ export default function Login() {
           name: result.user.displayName,
           email: result.user.email,
           image: result.user.photoURL,
-          role: "user",
+          role: "User",
         };
-        navigate("/"  );
+        navigate("/");
         //make user api
         fetch("http://localhost:5000/users", {
           method: "POST",
@@ -33,7 +32,6 @@ export default function Login() {
         });
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
       });
   };
@@ -52,7 +50,6 @@ export default function Login() {
         navigate(from);
       })
       .catch((error) => {
-        console.log(error.message);
         setError(error.message);
       });
   };
@@ -108,7 +105,7 @@ export default function Login() {
           <div>
             <button
               type="submit"
-              className="bg-rose-500 w-full rounded-md py-3 text-white"
+              className=" bg-yellow-500 w-full rounded-md py-3 text-white"
             >
               Continue
             </button>
@@ -116,7 +113,7 @@ export default function Login() {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
+          <button className="text-xs hover:underline hover:text-yellow-500 text-gray-400">
             Forgot password?
           </button>
         </div>
@@ -138,7 +135,7 @@ export default function Login() {
           Don't have an account yet?{" "}
           <Link
             to="/signup"
-            className="hover:underline hover:text-rose-500 text-gray-600"
+            className="hover:underline hover:text-yellow-500 text-gray-600"
           >
             Sign up
           </Link>
