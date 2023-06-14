@@ -19,6 +19,7 @@ import InstructorRoute from "./InstructorRoute";
 import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
 import Enrolled from "../Pages/Dashboard/Student/Enrolled";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 // import Courses from "../Pages/Courses/Courses";
 // import Courses from "../Pages/Courses/Courses";
 
@@ -120,7 +121,7 @@ export const router = createBrowserRouter([
         path: "manageusers",
         element: (
           <AdminRoute>
-            <ManageCourses />
+            <ManageUsers />
           </AdminRoute>
         ),
       },
