@@ -3,13 +3,18 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 export default function Login() {
-  const { login, googleSignIn } = useContext(AuthContext);
+  const { login, googleSignIn, user, loading, setLoading } =
+    useContext(AuthContext);
   const [error, setError] = useState();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
+
+  const [visible, setVisible] = useState(false);
 
   // google sign in
   const handleGoogleSignIn = () => {
@@ -23,7 +28,7 @@ export default function Login() {
         };
         navigate("/");
         //make user api
-        fetch("http://localhost:5000/users", {
+        fetch(`${import.meta.env.VITE_livesite_url}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -33,14 +38,11 @@ export default function Login() {
       })
       .catch((error) => {
         setError(error.message);
+        // setLoading(false);
       });
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const { email, password } = data;
 
@@ -80,11 +82,11 @@ export default function Login() {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#36d7b7] bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
-            <div>
+            <div className="relative">
               <div className="flex justify-between">
                 <label htmlFor="password" className="text-sm mb-2">
                   Password
@@ -92,28 +94,52 @@ export default function Login() {
               </div>
               <input
                 {...register("password", { required: true })}
-                type="password"
+                type={`${visible ? "text" : "password"}`}
                 name="password"
                 id="password"
                 required
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#36d7b7] bg-gray-200 text-gray-900"
               />
+              <div onClick={() => setVisible(!visible)}>
+                {visible ? (
+                  <>
+                    <AiOutlineEye
+                      size={22}
+                      className="absolute right-2 bottom-3 cursor-pointer "
+                    />
+                  </>
+                ) : (
+                  <>
+                    <AiOutlineEyeInvisible
+                      size={22}
+                      className="absolute right-2 bottom-3 cursor-pointer "
+                    />
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
           <div>
             <button
+              disabled={user}
               type="submit"
-              className=" bg-yellow-500 w-full rounded-md py-3 text-white"
+              className="bg-[#36d7b7] w-full rounded-md py-3 text-white"
             >
-              Continue
+              {loading ? (
+                <p className="">
+                  <TbFidgetSpinner className="animate-spin m-auto" size="24" />
+                </p>
+              ) : (
+                "Continue"
+              )}
             </button>
             {error ? <p className="text-red-500 mt-2">{error}</p> : ""}
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-yellow-500 text-gray-400">
+          <button className="text-xs hover:underline hover:text-[#36d7b7] text-gray-400">
             Forgot password?
           </button>
         </div>
@@ -135,7 +161,7 @@ export default function Login() {
           Don't have an account yet?{" "}
           <Link
             to="/signup"
-            className="hover:underline hover:text-yellow-500 text-gray-600"
+            className="hover:underline hover:text-[#36d7b7] text-gray-600"
           >
             Sign up
           </Link>

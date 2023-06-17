@@ -10,7 +10,7 @@ export default function PopularInstructors() {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/instructors")
+    fetch(`${import.meta.env.VITE_livesite_url}/instructors`)
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);

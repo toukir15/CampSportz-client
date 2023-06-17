@@ -4,7 +4,9 @@ const useSelectedCourses = () => {
   const { data: selectedCourses = [], refetch } = useQuery({
     queryKey: ["selectedCourses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/selectCourses");
+      const res = await fetch(
+        `${import.meta.env.VITE_livesite_url}/selectCourses`
+      );
       return res.json();
     },
   });

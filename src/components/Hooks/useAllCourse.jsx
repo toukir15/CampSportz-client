@@ -4,7 +4,7 @@ const useAllCourse = () => {
   const { data: allCourseData = [], refetch } = useQuery({
     queryKey: ["useMyCourse"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/courses`);
+      const res = await fetch(`${import.meta.env.VITE_livesite_url}/courses`);
       return res.json();
     },
   });

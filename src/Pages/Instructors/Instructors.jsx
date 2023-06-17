@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SingleInstructors from "./SingleInstructors";
+import SingleInstructors from "./SingleInstructor";
 import Container from "../../components/Container";
 import SectionTitle from "../../components/SectionTitle";
 
@@ -7,7 +7,7 @@ export default function Instructors() {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/instructors")
+    fetch(`${import.meta.env.VITE_livesite_url}/instructors`)
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 export default function Subscribe() {
   return (
-    <div className="w-3/4 mx-auto h-72 bg-[#F7FF62] flex flex-col items-center justify-center mb-8 space-y-5">
+    <div className="w-3/4 mx-auto md:h-72 h-84 p-4 bg-[#36d7b7] flex flex-col items-center justify-center space-y-5 mb-12">
       <h1 className="text-4xl text-center">
         Subscribe Now Forget <br /> 20% Discount Every Courses
       </h1>
-      <p>
+      <p className="text-center">
         Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Sed
         magna purus, fermentum eu
       </p>

@@ -92,8 +92,8 @@ export default function MyCourse() {
             placeholder="Bio"
           ></textarea>
           <button
-            onClick={() => handleSubmit(submitId)}
-            className="bg-yellow-500 px-4 py-2 rounded"
+            // onClick={() => handleSubmit(submitId)}
+            className="bg-[#36d7b7] px-4 py-2 rounded"
           >
             Submit
           </button>

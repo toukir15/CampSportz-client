@@ -7,7 +7,7 @@ export default function PaymentHistory() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/paymentsHistory")
+      .get(`${import.meta.env.VITE_livesite_url}/paymentsHistory`)
       .then((response) => {
         const data = response.data;
         setPayments(data);

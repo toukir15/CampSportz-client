@@ -16,7 +16,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (price > 0) {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch(`${import.meta.env.VITE_livesite_url}/create-payment-intent`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ price }),
@@ -98,7 +98,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
         selected_courses_id: selectedCoursesId,
       };
       // payment
-      fetch("http://localhost:5000/payments", {
+      fetch(`${import.meta.env.VITE_livesite_url}/payments`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -109,7 +109,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
         .then((data) => console.log(data));
 
       // payment history
-      fetch("http://localhost:5000/paymentsHistory", {
+      fetch(`${import.meta.env.VITE_livesite_url}/paymentsHistory`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

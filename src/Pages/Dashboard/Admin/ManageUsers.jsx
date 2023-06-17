@@ -6,7 +6,7 @@ export default function ManageUsers() {
 
   const handleMakeAdmin = (role, id) => {
     const roleObj = { role };
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`${import.meta.env.VITE_livesite_url}/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(roleObj),

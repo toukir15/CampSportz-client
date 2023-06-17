@@ -32,7 +32,7 @@ export default function AddClass() {
       status: "pending",
       enrolled_students: 0,
     };
-    fetch("http://localhost:5000/courses", {
+    fetch(`${import.meta.env.VITE_livesite_url}/courses`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -210,7 +210,7 @@ export default function AddClass() {
               </div>
             </div>
           </div>
-          <div className="bg-yellow-500 py-2 flex justify-center text-md font-medium rounded">
+          <div className="bg-[#36d7b7] py-2 flex justify-center text-md font-medium rounded">
             <button className="">Add a Course</button>
           </div>
         </form>

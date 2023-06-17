@@ -8,7 +8,9 @@ export default function ManageCourses() {
 
   // handle pending status
   const handleApproved = (id) => {
-    fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+    fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
+      method: "PATCH",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -18,7 +20,9 @@ export default function ManageCourses() {
   };
 
   const handleSubmit = (id) => {
-    fetch(`http://localhost:5000/courses/${id}`, { method: "DELETE" })
+    fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
+      method: "DELETE",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
@@ -26,7 +30,9 @@ export default function ManageCourses() {
         }
       });
 
-    fetch(`http://localhost:5000/courses/${id}`, { method: "PATCH" })
+    fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
+      method: "PATCH",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -58,44 +64,26 @@ export default function ManageCourses() {
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
-              Image
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Product name
-            </th>
+            <th className="px-6 py-3">Image</th>
+            <th className="px-6 py-3">Product name</th>
 
-            <th scope="col" className="px-6 py-3">
-              Category
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Price
-            </th>
-            <th scope="col" className="px-8 py-3 text-right">
-              Action
-            </th>
-            <th scope="col" className="px-8 py-3 text-right">
-              Action
-            </th>
+            <th className="px-6 py-3">Category</th>
+            <th className="px-6 py-3">Price</th>
+            <th className="px-8 py-3 text-right">Action</th>
+            <th className="px-8 py-3 text-right">Action</th>
           </tr>
         </thead>
         <tbody className="">
           {allCourseData.map((course) => (
             <tr key={course._id} className="  dark:bg-gray-800 ">
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
+              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <img
                   src={course.image}
                   className="mask mask-squircle w-14 h-14 cover"
                   alt=""
                 />
               </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
+              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {course.course_name}
               </td>
               <td className="px-6 py-4">{course.category}</td>
@@ -144,7 +132,7 @@ export default function ManageCourses() {
           <button
             onClick={() => handleSubmit(submitId)}
             // htmlFor="my-modal-3"
-            className="bg-yellow-500 px-4 py-2 rounded"
+            className="bg-[#36d7b7] px-4 py-2 rounded"
           >
             Submit
           </button>

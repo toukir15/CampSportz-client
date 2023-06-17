@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AiOutlineBarChart, AiTwotoneStar } from "react-icons/ai";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import Swal from "sweetalert2";
-import { AuthContext } from "../SignUp/Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 import useInstructor from "../../components/Hooks/useInstructor";
 import useAdmin from "../../components/Hooks/useAdmin";

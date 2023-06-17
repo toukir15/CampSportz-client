@@ -1,10 +1,10 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
-// import useUsers from "../components/Hooks/useUsers";
+import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../components/Hooks/useAdmin";
 import useInstructor from "../components/Hooks/useInstructor";
 import useStudent from "../components/Hooks/useStudents";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
-import { GrCompliance, GrUserManager } from "react-icons/gr";
+import { GrCompliance } from "react-icons/gr";
+import { FiUsers } from "react-icons/fi";
 import { MdOutlineGolfCourse, MdOutlineManageSearch } from "react-icons/md";
 import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineInsertRowAbove } from "react-icons/ai";
@@ -14,12 +14,8 @@ import { SiCountingworkspro } from "react-icons/si";
 
 export default function Dashboard() {
   const [isInstructor] = useInstructor();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isAdmin] = useAdmin();
   const [isStudent] = useStudent();
-
-  if (isAdminLoading) {
-    return <p>loading</p>;
-  }
 
   return (
     <div className="drawer lg:drawer-open relative">
@@ -43,19 +39,50 @@ export default function Dashboard() {
             (isStudent?.role === "User" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/selected">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/selected"
+                  >
                     <BiSelectMultiple size="20" /> <a>Selected Courses</a>
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/enrolled">
+                  <NavLink
+                    exact
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/enrolled"
+                  >
                     <GrCompliance size="20" /> <a>Enrolled Courses</a>
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/paymentHistory">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/paymentHistory"
+                  >
                     <BsClockHistory size="20" /> <a>Payment History</a>
                   </NavLink>
                 </li>
@@ -66,13 +93,33 @@ export default function Dashboard() {
             (isInstructor?.role === "Instructor" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/addcourse">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/addcourse"
+                  >
                     <BiAddToQueue size={20} /> <a>Add a Class</a>
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/mycourse">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/mycourse"
+                  >
                     <SiCountingworkspro size={20} /> <a>My Course</a>
                   </NavLink>
                 </li>
@@ -82,14 +129,34 @@ export default function Dashboard() {
             (isAdmin?.role === "Admin" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/managecourses">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/managecourses"
+                  >
                     <MdOutlineManageSearch size={22} /> <a>Manage Courses</a>
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/manageusers">
-                    <GrUserManager size={20} /> <a>Manage Users</a>
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active bg-gray-200 text-[#36d7b7]"
+                        : ""
+                    }
+                    activeClassName="active-link"
+                    to="/dashboard/manageusers"
+                  >
+                    <FiUsers size={20} /> <a>Manage Users</a>
                   </NavLink>
                 </li>
               </>
@@ -97,19 +164,49 @@ export default function Dashboard() {
           <hr className="my-4" />
 
           <li>
-            <NavLink to="/">
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-gray-200 text-[#36d7b7]"
+                  : ""
+              }
+              activeClassName="active-link"
+              to="/"
+            >
               <HiOutlineHome size="20" /> <a>Home</a>
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/instructors">
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-gray-200 text-[#36d7b7]"
+                  : ""
+              }
+              activeClassName="active-link"
+              to="/instructors"
+            >
               <AiOutlineInsertRowAbove size="20" /> <a>Instructor</a>
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/courses">
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-gray-200 text-[#36d7b7]"
+                  : ""
+              }
+              activeClassName="active-link"
+              to="/courses"
+            >
               <MdOutlineGolfCourse size="20" /> <a>Courses</a>
             </NavLink>
           </li>

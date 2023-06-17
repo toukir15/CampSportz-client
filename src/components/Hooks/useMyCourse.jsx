@@ -9,7 +9,7 @@ const useMyCourse = () => {
     queryKey: ["useMyCourse"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/courses?email=${user?.email}`
+        `${import.meta.env.VITE_livesite_url}/courses?email=${user?.email}`
       );
       return res.json();
     },

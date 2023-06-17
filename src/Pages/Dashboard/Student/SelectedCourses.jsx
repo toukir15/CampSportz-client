@@ -6,12 +6,10 @@ import SectionTitle from "../../../components/SectionTitle";
 
 export default function SelectedCourses() {
   const [selectedCourses, refetch] = useSelectedCourses();
-  // console.log(selectedCourses);
-  // const [total, setTotal] = useState("");
 
   // handle delete
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/selectCourses/${id}`, {
+    fetch(`${import.meta.env.VITE_livesite_url}/selectCourses/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
