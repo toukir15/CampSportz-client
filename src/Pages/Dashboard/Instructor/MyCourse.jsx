@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useMyCourse from "../../../components/Hooks/useMyCourse";
 import SectionTitle from "../../../components/SectionTitle";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function MyCourse() {
   const [myCourseData] = useMyCourse();
+  const { isNight } = useContext(AuthContext);
 
   return (
     <div className="w-full">
       <SectionTitle heading={"My Courses"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
+        <thead
+          className={`${
+            isNight ? "text-white" : "text-gray-900 dark:text-white"
+          }`}
+        >
           <tr>
             <th scope="col" className="px-6 py-3">
               Image
@@ -34,10 +40,15 @@ export default function MyCourse() {
         </thead>
         <tbody className="">
           {myCourseData.map((course) => (
-            <tr key={course._id} className="  dark:bg-gray-800 ">
+            <tr
+              key={course._id}
+              className={`${
+                isNight ? "text-white" : "text-gray-900 dark:text-white"
+              }`}
+            >
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap "
               >
                 <img
                   src={course.image}
@@ -47,7 +58,7 @@ export default function MyCourse() {
               </td>
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap"
               >
                 {course.course_name}
               </td>

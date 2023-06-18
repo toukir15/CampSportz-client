@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import useUsers from "../../../components/Hooks/useUsers";
 import SectionTitle from "../../../components/SectionTitle";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function ManageUsers() {
   const [users, refetch] = useUsers();
+  const { isNight } = useContext(AuthContext);
 
   const handleMakeAdmin = (role, id) => {
     const roleObj = { role };
@@ -23,8 +26,12 @@ export default function ManageUsers() {
     <div className="w-full">
       <SectionTitle heading={"Manage Users"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-          <tr>
+        <thead>
+          <tr
+            className={`${
+              isNight ? "text-white" : "text-gray-900 dark:text-white"
+            }`}
+          >
             <th scope="col" className="px-6 py-3">
               Image
             </th>
@@ -48,7 +55,12 @@ export default function ManageUsers() {
         </thead>
         <tbody className="">
           {users.map((user) => (
-            <tr key={user._id} className="  dark:bg-gray-800 ">
+            <tr
+              key={user._id}
+              className={`${
+                isNight ? "text-white" : "text-gray-900 dark:text-white"
+              }`}
+            >
               <td
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -61,7 +73,7 @@ export default function ManageUsers() {
               </td>
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap "
               >
                 {user.name}
               </td>

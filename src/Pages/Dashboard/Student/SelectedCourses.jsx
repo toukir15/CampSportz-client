@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import useSelectedCourses from "../../../components/Hooks/useSelectedCourses";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function SelectedCourses() {
   const [selectedCourses, refetch] = useSelectedCourses();
+  const { isNight } = useContext(AuthContext);
 
   // handle delete
   const handleDelete = (id) => {
@@ -28,11 +30,6 @@ export default function SelectedCourses() {
   };
   const total = selectedCourses?.reduce((sum, course) => course.price + sum, 0);
 
-  // if (selectedCourses) {
-  // const totalPrice = Math.floor(total);
-  // setTotal(totalPrice);
-  // }
-
   return (
     <div className="relative overflow-x-auto w-full px-8">
       <SectionTitle heading={"Selected Courses"} />
@@ -48,7 +45,11 @@ export default function SelectedCourses() {
         </Link>
       </div>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
+        <thead
+          className={`text-xs ${
+            isNight ? "text-white" : "text-gray-900 dark:text-gray-"
+          } uppercase 400`}
+        >
           <tr>
             <th scope="col" className="px-6 py-3">
               Image
@@ -68,12 +69,12 @@ export default function SelectedCourses() {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={`${isNight ? "text-white" : "text-gray-800"}`}>
           {selectedCourses.map((course) => (
             <tr key={course._id} className="  dark:bg-gray-800 ">
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap"
               >
                 <img
                   src={course.image}
@@ -83,7 +84,7 @@ export default function SelectedCourses() {
               </td>
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap "
               >
                 {course.course_name}
               </td>

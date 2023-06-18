@@ -12,7 +12,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import SectionTitle from "../../../components/SectionTitle";
 
 export default function AddClass() {
-  const { user } = useContext(AuthContext);
+  const { user, isNight } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -51,15 +51,14 @@ export default function AddClass() {
           <SectionTitle heading={"Add a Course"} />
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="px-4">
-          {/* {isError && (
-          <div className="w-full my-3 px-5 py-2.5 text-base font-medium rounded-lg bg-[#ffd6d6] text-[#cd3131]">
-            {isError}
-          </div>
-        )} */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
             {/* picture */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Course Photo
               </label>
               {/* className="w-5 h-5 text-gray-500 dark:text-gray-400" */}
@@ -80,7 +79,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Course Name
               </label>
               <div className="relative mb-6">
@@ -100,7 +103,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Instructor Name
               </label>
               <div className="relative mb-6">
@@ -121,7 +128,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Instructor Email
               </label>
               <div className="relative mb-6">
@@ -151,7 +162,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Category
               </label>
               <div className="relative mb-6">
@@ -171,7 +186,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Price
               </label>
               <div className="relative mb-6">
@@ -191,7 +210,11 @@ export default function AddClass() {
             </div>
             {/* input 1  */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                className={` ${
+                  isNight ? "text-white" : "text-gray-900"
+                } block mb-2 text-sm font-medium  `}
+              >
                 Available Seats
               </label>
               <div className="relative mb-6">

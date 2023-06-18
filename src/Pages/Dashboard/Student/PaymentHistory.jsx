@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle";
 import axios from "axios";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function PaymentHistory() {
   const [payments, setPayments] = useState([]);
+  const { isNight } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -22,7 +24,11 @@ export default function PaymentHistory() {
     <div>
       <SectionTitle heading={"Payment History"}></SectionTitle>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
+        <thead
+          className={`text-xs ${
+            isNight ? "text-white" : "text-gray-900 dark:text-gray-400"
+          }  uppercase `}
+        >
           <tr>
             <th scope="col" className="px-6 py-3">
               Courses Name
@@ -41,10 +47,15 @@ export default function PaymentHistory() {
         </thead>
         <tbody>
           {payments.map((payment) => (
-            <tr key={payment._id} className="  dark:bg-gray-800 ">
+            <tr
+              key={payment._id}
+              className={`${
+                isNight ? "text-white" : "text-gray-900 dark:text-white"
+              }`}
+            >
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium  whitespace-nowrap "
               >
                 <div className="grid gap-4">
                   {payment?.courses_name?.map((name, index) => (

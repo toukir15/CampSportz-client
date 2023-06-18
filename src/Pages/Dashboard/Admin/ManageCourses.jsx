@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useAllCourse from "../../../components/Hooks/useAllCourse";
 import SectionTitle from "../../../components/SectionTitle";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 export default function ManageCourses() {
   const [allCourseData, refetch] = useAllCourse();
   const [submitId, setSubmitId] = useState("");
+  const { isNight } = useContext(AuthContext);
 
   // handle pending status
   const handleApproved = (id) => {
@@ -62,7 +64,11 @@ export default function ManageCourses() {
     <div className="w-full">
       <SectionTitle heading={"Manage Courses"} />
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
+        <thead
+          className={`${
+            isNight ? "text-white" : "text-gray-900 dark:text-white"
+          }`}
+        >
           <tr>
             <th className="px-6 py-3">Image</th>
             <th className="px-6 py-3">Product name</th>
@@ -75,15 +81,20 @@ export default function ManageCourses() {
         </thead>
         <tbody className="">
           {allCourseData.map((course) => (
-            <tr key={course._id} className="  dark:bg-gray-800 ">
-              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr
+              key={course._id}
+              className={`${
+                isNight ? "text-white" : "text-gray-900 dark:text-white"
+              }`}
+            >
+              <td className="px-6 py-4 font-medium  whitespace-nowrap ">
                 <img
                   src={course.image}
                   className="mask mask-squircle w-14 h-14 cover"
                   alt=""
                 />
               </td>
-              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <td className="px-6 py-4 font-medium 900 whitespace-nowrap ">
                 {course.course_name}
               </td>
               <td className="px-6 py-4">{course.category}</td>
