@@ -1,7 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import axios from "axios";
 // import "./CheckoutForm.css";
 
 export default function CheckoutForm({ price, selectedCourses }) {
@@ -47,6 +46,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
       type: "card",
       card,
     });
+
     if (error) {
       setError(error.message);
     } else {
@@ -70,34 +70,31 @@ export default function CheckoutForm({ price, selectedCourses }) {
     console.log("payment intent", paymentIntent);
 
     setProcessing(false);
-    if (paymentIntent?.status === "succeeded") {
-      // const transactionId = paymentIntent.id;
-      setTransactionId(paymentIntent.id);
-      const coursesName = await selectedCourses.map(
-        (course) => course.course_name
-      );
-      const coursesId = await selectedCourses.map((course) => course._id);
-      const selectedCoursesId = await selectedCourses.map(
-        (course) => course.course_id
-      );
-      // console.log(selectedCoursesId, coursesId);
 
-      const paymentHistory = {
+    if (paymentIntent?.status === "succeeded") {
+      setTransactionId(paymentIntent?.id);
+      const coursesName = await selectedCourses.map(
+        (course) => course?.course_name
+      );
+      const coursesId = await selectedCourses.map((course) => course?._id);
+      const selectedCoursesId = await selectedCourses.map(
+        (course) => course?.course_id
+      );
+
+      // payment history data
+      const payment = {
         email: user?.email,
-        transactionId: paymentIntent.id,
+        transactionId: paymentIntent?.id,
         price,
         date: new Date(),
-        quantity: selectedCourses.length,
+        quantity: selectedCourses?.length,
         selected_courses_id: selectedCoursesId,
         courses_id: coursesId,
         orderStatus: "pending",
         courses_name: coursesName,
       };
 
-      const payment = {
-        selected_courses_id: selectedCoursesId,
-      };
-      // payment
+      // payments request
       fetch(`${import.meta.env.VITE_livesite_url}/payments`, {
         method: "POST",
         headers: {
@@ -114,7 +111,7 @@ export default function CheckoutForm({ price, selectedCourses }) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(paymentHistory),
+        body: JSON.stringify(payment),
       })
         .then((res) => res.json())
         .then((data) => console.log(data));

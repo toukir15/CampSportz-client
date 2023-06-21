@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   // update user profile
   const updateUserProfile = (name, userPhoto) => {
     setLoading(true);
-    return updateProfile(auth.currentUser, {
+    return updateProfile(auth?.currentUser, {
       displayName: name,
       photoURL: userPhoto,
     });
@@ -61,17 +61,16 @@ export const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         axios
           .post(`${import.meta.env.VITE_livesite_url}/jwt`, {
-            email: currentUser.email,
+            email: currentUser?.email,
           })
           .then((data) => {
-            localStorage.setItem("access-token", data.data.token);
+            localStorage.setItem("access-token", data?.data?.token);
           })
           .catch((error) => console.log(error));
       } else {
         localStorage.removeItem("access-token");
       }
       setLoading(false);
-      // setLoading(false);
     });
     return () => unSubscribe();
   }, []);
@@ -89,6 +88,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     login,
   };
+
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
   );

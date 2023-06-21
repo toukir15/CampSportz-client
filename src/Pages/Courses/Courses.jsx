@@ -7,6 +7,7 @@ export default function Courses() {
   const [coursesData, setCoursesData] = useState([]);
 
   useEffect(() => {
+    // all aproved courses
     fetch(`${import.meta.env.VITE_livesite_url}/course/approved`)
       .then((res) => res.json())
       .then((data) => setCoursesData(data));

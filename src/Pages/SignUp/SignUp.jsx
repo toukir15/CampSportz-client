@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { TbFidgetSpinner } from "react-icons/tb";
+import Social from "../../components/Shared/Social/Social";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -12,41 +12,9 @@ export default function SignUp() {
   const [confirmVisible, setConfirmVisible] = useState(false);
   // const location = useLocation();
   const [error, setError] = useState("");
-  const {
-    user,
-    createUser,
-    googleSignIn,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useContext(AuthContext);
+  const { user, createUser, updateUserProfile, loading } =
+    useContext(AuthContext);
   console.log(loading);
-
-  // google sign in
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        const user = {
-          name: result.user.displayName,
-          email: result.user.email,
-          image: result.user.photoURL,
-          role: "User",
-        };
-        //make user api
-        fetch(`${import.meta.env.VITE_livesite_url}/users`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
-        navigate("/");
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  };
 
   const {
     register,
@@ -62,7 +30,7 @@ export default function SignUp() {
       return;
     }
 
-    const imageData = data.image[0];
+    const imageData = data?.image[0];
     const formData = new FormData();
     formData.append("image", imageData);
     reset();
@@ -290,13 +258,7 @@ export default function SignUp() {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div
-          onClick={handleGoogleSignIn}
-          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
-        >
-          <FcGoogle size={26} />
-          <p>Continue with Google</p>
-        </div>
+        <Social />
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}
           <Link

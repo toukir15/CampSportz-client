@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import useAllCourse from "../../../components/Hooks/useAllCourse";
 import SectionTitle from "../../../components/SectionTitle";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function ManageCourses() {
   const [allCourseData, refetch] = useAllCourse();
-  const [submitId, setSubmitId] = useState("");
+  const [deniedId, setDeniedId] = useState("");
   const { isNight } = useContext(AuthContext);
 
   // handle pending status
@@ -21,38 +22,62 @@ export default function ManageCourses() {
       });
   };
 
-  const handleSubmit = (id) => {
+  const handleSubmit = (event, id) => {
+    event.preventDefault();
+    const feedback = event?.target?.feedback?.value;
+    console.log(feedback);
+    // TODO: feedback
+
+    // pending course approved request
+    // fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
+    //   method: "PATCH",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.modifiedCount > 0) {
+    //       console.log("updated successfully");
+    //       refetch();
+    //     }
+    //   });
+
+    // denied course request
     fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.deletedCount > 0) {
+        if (data?.deletedCount > 0) {
+          console.log("deleted successfully");
           refetch();
         }
       });
 
-    fetch(`${import.meta.env.VITE_livesite_url}/courses/${id}`, {
+    // add feedback request
+    fetch(`${import.meta.env.VITE_livesite_url}/courses/feedback/${id}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ feedback }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
-          refetch();
-        }
+        console.log(data);
+        toast("Wow so easy !");
       });
 
+    // close modal
     const modal = document.getElementById("my_modal_3");
     modal.close();
   };
 
-  // handle modal form
-  const handleModal = (event) => {
-    event.preventDefault();
-    const feedback = event.target.feedback.value;
-    console.log(feedback);
-    // Form.reset();
-  };
+  // // handle modal form
+  // const handleModal = (event) => {
+  //   event.preventDefault();
+  //   const feedback = event.target.feedback.value;
+  //   console.log(feedback);
+  //   // Form.reset();
+  // };
 
   // const handle modal close
   const handleCloseModal = () => {
@@ -111,7 +136,7 @@ export default function ManageCourses() {
                 {course.status === "pending" && (
                   <button
                     onClick={() => {
-                      setSubmitId(course._id);
+                      setDeniedId(course._id);
                       window.my_modal_3.showModal();
                     }}
                     className="bg-red-500 py-1 px-3 rounded text-black"
@@ -126,7 +151,11 @@ export default function ManageCourses() {
       </table>
 
       <dialog id="my_modal_3" className="modal">
-        <form onSubmit={handleModal} method="dialog" className="modal-box">
+        <form
+          onSubmit={(event) => handleSubmit(event, deniedId)}
+          method="dialog"
+          className="modal-box"
+        >
           <p
             onClick={handleCloseModal}
             htmlFor="my-modal-3"
@@ -140,11 +169,7 @@ export default function ManageCourses() {
             className="textarea w-full border-2 border-gray-300 my-2"
             placeholder="Bio"
           ></textarea>
-          <button
-            onClick={() => handleSubmit(submitId)}
-            // htmlFor="my-modal-3"
-            className="bg-[#36d7b7] px-4 py-2 rounded"
-          >
+          <button type="submit" className="bg-[#36d7b7] px-4 py-2 rounded">
             Submit
           </button>
         </form>

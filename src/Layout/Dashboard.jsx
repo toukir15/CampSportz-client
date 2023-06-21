@@ -11,8 +11,11 @@ import { AiOutlineInsertRowAbove } from "react-icons/ai";
 import { BiAddToQueue, BiSelectMultiple } from "react-icons/bi";
 import { BsClockHistory } from "react-icons/bs";
 import { SiCountingworkspro } from "react-icons/si";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export default function Dashboard() {
+  const { user } = useContext(AuthContext);
   const [isInstructor] = useInstructor();
   const [isAdmin] = useAdmin();
   const [isStudent] = useStudent();
@@ -33,6 +36,16 @@ export default function Dashboard() {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content  font-medium">
+          <div className="mx-auto flex flex-col items-center">
+            <img
+              src={user?.photoURL}
+              alt=""
+              className="w-[100px] h-[100px] rounded-full mb-2"
+            />
+            <p className="mb-2">{user?.displayName}</p>
+            <p>{user?.email}</p>
+          </div>
+          <hr className="my-4" />
           {/* Sidebar content here */}
 
           {isStudent?.isStudent ||

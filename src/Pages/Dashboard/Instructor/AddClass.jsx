@@ -13,25 +13,22 @@ import SectionTitle from "../../../components/SectionTitle";
 
 export default function AddClass() {
   const { user, isNight } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-
+    // course info data
     const courseInfo = {
-      image: data.url,
-      course_name: data.courseName,
-      instructor_name: data.instructorName,
-      instructor_email: data.instructorEmail,
-      category: data.category,
-      price: data.price,
-      available_seats: data.seats,
+      image: data?.url,
+      course_name: data?.courseName,
+      instructor_name: data?.instructorName,
+      instructor_email: data?.instructorEmail,
+      category: data?.category,
+      price: data?.price,
+      available_seats: data?.seats,
       status: "pending",
       enrolled_students: 0,
     };
+
+    // add new course post reqest
     fetch(`${import.meta.env.VITE_livesite_url}/courses`, {
       method: "POST",
       headers: {
@@ -42,7 +39,6 @@ export default function AddClass() {
       .then((res) => res.json())
       .then((data) => console.log(data));
   };
-  //   console.log(errors);
 
   return (
     <>

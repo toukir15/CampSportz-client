@@ -28,7 +28,10 @@ export default function SelectedCourses() {
         }
       });
   };
-  const total = selectedCourses?.reduce((sum, course) => course.price + sum, 0);
+  const total = selectedCourses?.reduce(
+    (sum, course) => course?.price + sum,
+    0
+  );
 
   return (
     <div className="relative overflow-x-auto w-full px-8">
@@ -71,13 +74,13 @@ export default function SelectedCourses() {
         </thead>
         <tbody className={`${isNight ? "text-white" : "text-gray-800"}`}>
           {selectedCourses.map((course) => (
-            <tr key={course._id} className="  dark:bg-gray-800 ">
+            <tr key={course?._id} className="  dark:bg-gray-800 ">
               <td
                 scope="row"
                 className="px-6 py-4 font-medium  whitespace-nowrap"
               >
                 <img
-                  src={course.image}
+                  src={course?.image}
                   className="mask mask-squircle w-14 h-14 cover"
                   alt=""
                 />
@@ -86,19 +89,19 @@ export default function SelectedCourses() {
                 scope="row"
                 className="px-6 py-4 font-medium  whitespace-nowrap "
               >
-                {course.course_name}
+                {course?.course_name}
               </td>
-              <td className="px-6 py-4">{course.category}</td>
+              <td className="px-6 py-4">{course?.category}</td>
               <td className="px-6 py-4  ">
-                {course.price === "Free" ? (
-                  <>{course.price}</>
+                {course?.price === "Free" ? (
+                  <>{course?.price}</>
                 ) : (
-                  <>$ {course.price}</>
+                  <>$ {course?.price}</>
                 )}
               </td>
               <td className="px-6 py-4 text-right">
                 <button
-                  onClick={() => handleDelete(course._id)}
+                  onClick={() => handleDelete(course?._id)}
                   className="bg-red-500 py-1 px-3 rounded text-black"
                 >
                   Delete

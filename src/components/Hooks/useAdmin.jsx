@@ -7,6 +7,7 @@ export default function useAdmin() {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
+  // get admin data by email
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
     queryKey: ["isAdmin", user?.email],
     queryFn: async () => {

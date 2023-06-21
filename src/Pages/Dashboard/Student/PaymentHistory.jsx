@@ -11,7 +11,7 @@ export default function PaymentHistory() {
     axios
       .get(`${import.meta.env.VITE_livesite_url}/paymentsHistory`)
       .then((response) => {
-        const data = response.data;
+        const data = response?.data;
         setPayments(data);
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ export default function PaymentHistory() {
         <tbody>
           {payments.map((payment) => (
             <tr
-              key={payment._id}
+              key={payment?._id}
               className={`${
                 isNight ? "text-white" : "text-gray-900 dark:text-white"
               }`}

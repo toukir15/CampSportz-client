@@ -7,10 +7,12 @@ export default function Instructors() {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
+    // instructor data
     fetch(`${import.meta.env.VITE_livesite_url}/instructors`)
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
+
   return (
     <Container>
       <SectionTitle heading={"Instructor"} />

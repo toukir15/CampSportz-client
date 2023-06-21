@@ -7,6 +7,7 @@ export default function ManageUsers() {
   const [users, refetch] = useUsers();
   const { isNight } = useContext(AuthContext);
 
+  // handle make admin
   const handleMakeAdmin = (role, id) => {
     const roleObj = { role };
     fetch(`${import.meta.env.VITE_livesite_url}/users/${id}`, {

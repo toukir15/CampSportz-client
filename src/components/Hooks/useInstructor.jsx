@@ -8,6 +8,7 @@ export default function useInstructor() {
   const { user } = useContext(AuthContext);
 
   const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
+    // get instructor data by email
     queryKey: ["isInstructor", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user/instructor/${user?.email}`);

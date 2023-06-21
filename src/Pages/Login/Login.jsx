@@ -1,46 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { TbFidgetSpinner } from "react-icons/tb";
+import Social from "../../components/Shared/Social/Social";
 
 export default function Login() {
-  const { login, googleSignIn, user, loading, setLoading } =
-    useContext(AuthContext);
+  const { login, user, loading } = useContext(AuthContext);
   const [error, setError] = useState();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
 
   const [visible, setVisible] = useState(false);
-
-  // google sign in
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        const user = {
-          name: result.user.displayName,
-          email: result.user.email,
-          image: result.user.photoURL,
-          role: "User",
-        };
-        navigate("/");
-        //make user api
-        fetch(`${import.meta.env.VITE_livesite_url}/users`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
-      })
-      .catch((error) => {
-        setError(error.message);
-        // setLoading(false);
-      });
-  };
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -150,13 +123,9 @@ export default function Login() {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div
-          onClick={handleGoogleSignIn}
-          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
-        >
-          <FcGoogle size={26} />
-          <p>Continue with Google</p>
-        </div>
+        {/* social component  */}
+        <Social />
+
         <p className="px-6 text-sm text-center text-gray-400">
           Don't have an account yet?{" "}
           <Link

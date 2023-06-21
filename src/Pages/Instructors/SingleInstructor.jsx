@@ -2,9 +2,7 @@ import { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { AuthContext } from "../../Provider/AuthProvider";
-// import { motion } from "framer-motion";
 
-// import { IoTime } from "react-icons/io";
 export default function SingleInstructor({ instructor }) {
   const { isNight } = useContext(AuthContext);
   const {

@@ -22,6 +22,7 @@ export default function SingleCourse({ courseData }) {
     available_seats,
   } = courseData;
 
+  // conditional for button disabled
   const conditionalBtn =
     available_seats === 0 ||
     isAdmin?.role === "Admin" ||
@@ -36,6 +37,8 @@ export default function SingleCourse({ courseData }) {
       category,
       image,
     };
+
+    // select courses post request
     fetch(`${import.meta.env.VITE_livesite_url}/selectCourses`, {
       method: "POST",
       headers: {
