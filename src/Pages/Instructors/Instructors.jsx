@@ -15,14 +15,16 @@ export default function Instructors() {
 
   return (
     <Container>
-      <SectionTitle heading={"Instructor"} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-20 gap-6">
-        {instructors.map((instructor) => (
-          <SingleInstructors
-            key={instructor.instructor_id}
-            instructor={instructor}
-          />
-        ))}
+      <div className="flex flex-col items-center px-2">
+        <SectionTitle heading={"Instructor"} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-20 gap-x-10">
+          {instructors.map((instructor) => (
+            <SingleInstructors
+              key={instructor.instructor_id}
+              instructor={instructor}
+            />
+          ))}
+        </div>
       </div>
     </Container>
   );

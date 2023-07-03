@@ -3,7 +3,6 @@ import useAdmin from "../components/Hooks/useAdmin";
 import useInstructor from "../components/Hooks/useInstructor";
 import useStudent from "../components/Hooks/useStudents";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
-import { GrCompliance } from "react-icons/gr";
 import { FiUsers } from "react-icons/fi";
 import { MdOutlineGolfCourse, MdOutlineManageSearch } from "react-icons/md";
 import { HiOutlineHome } from "react-icons/hi";
@@ -64,23 +63,6 @@ export default function Dashboard() {
                     to="/dashboard/selected"
                   >
                     <BiSelectMultiple size="20" /> <a>Selected Courses</a>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    exact
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
-                        : ""
-                    }
-                    activeClassName="active-link"
-                    to="/dashboard/enrolled"
-                  >
-                    <GrCompliance size="20" /> <a>Enrolled Courses</a>
                   </NavLink>
                 </li>
 

@@ -10,10 +10,9 @@ export default function PopularCourses() {
       .then((data) => setCoursesData(data));
   }, []);
   return (
-    <div>
+    <div className="flex flex-col items-center !important">
       <SectionTitle heading={"Popular Classes"} />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 justify-center items-center">
         {coursesData.slice(0, 6).map((courseData) => (
           <SinglePopularCourse
             key={courseData.class_id}

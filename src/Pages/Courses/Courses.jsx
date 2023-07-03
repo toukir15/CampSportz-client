@@ -14,10 +14,10 @@ export default function Courses() {
   }, []);
 
   return (
-    <div>
+    <div className="flex items-center px-2">
       <Container>
         <SectionTitle heading={"Courses"} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 b-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 b-20">
           {coursesData.map((courseData, index) => (
             <SingleCourse key={index} courseData={courseData}></SingleCourse>
           ))}

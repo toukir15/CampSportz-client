@@ -28,7 +28,7 @@ export default function SinglePopularCourse({ courseData }) {
         -8%
       </p>
       <div className="px-5 pb-5">
-        <h5 className="mb-2 text-2xl font-medium tracking-tight dark:text-white">
+        <h5 className="mb-2 text-xl md:text-2xl font-medium tracking-tight dark:text-white">
           {course_name}
         </h5>
         <div>

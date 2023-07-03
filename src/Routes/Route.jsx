@@ -15,7 +15,6 @@ import StudentRoute from "./StudentRoute";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
-import Enrolled from "../Pages/Dashboard/Student/Enrolled";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 
@@ -52,14 +51,7 @@ export const router = createBrowserRouter([
           </StudentRoute>
         ),
       },
-      {
-        path: "enrolled",
-        element: (
-          <StudentRoute>
-            <Enrolled />
-          </StudentRoute>
-        ),
-      },
+
       {
         path: "payment",
         element: (

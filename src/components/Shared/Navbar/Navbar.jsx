@@ -6,11 +6,17 @@ import { BsMoon, BsSun } from "react-icons/bs";
 import { AiOutlineClose, AiOutlineMenuUnfold } from "react-icons/ai";
 
 export default function Navbar() {
-  const { user, logout, setIsNight } = useContext(AuthContext);
+  const {
+    user,
+    logout,
+    setIsNight,
+    theme: themeValue,
+  } = useContext(AuthContext);
+  const [theme, setTheme] = themeValue;
+  console.log(theme);
   const [isToggle, setIsToggle] = useState(false);
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
+
+  // handle theme change
   const handleToggle = (e) => {
     if (e.target.checked) {
       setTheme("dark");
