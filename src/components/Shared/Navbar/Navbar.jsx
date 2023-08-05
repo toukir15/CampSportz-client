@@ -36,7 +36,7 @@ export default function Navbar() {
       .catch((error) => console.log(error.message));
   };
   return (
-    <div className="border-b">
+    <div className="border-b fixed w-full z-10">
       <Container>
         <div className="navbar bg-base-100 relative">
           <div className="flex-1 text-2xl font-medium">
@@ -48,7 +48,7 @@ export default function Navbar() {
               )}
             </div>
             <Link to="">
-              <span className="text-[#36d7b7]">Camp</span>Sportz
+              <span className="text-[#36d7b7]">Camp</span>Sports
             </Link>
           </div>
 
@@ -113,15 +113,6 @@ export default function Navbar() {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
               >
-                <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
                 <li>
                   {user ? (
                     <a onClick={handleLogout}>Logout</a>

@@ -62,6 +62,7 @@ export default function SingleCourse({ courseData }) {
 
   return (
     <div
+      data-aos="zoom-in"
       // TODO: fix the bg
       className={`max-w-sm ${
         isNight

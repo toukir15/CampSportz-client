@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Container from "../../Container";
 import { BiRightArrow } from "react-icons/bi";
 
@@ -7,11 +8,9 @@ export default function Footer() {
       <Container>
         <footer className="footer p-10 bg-base-200 text-base-content pt-32">
           <div>
-            <img
-              className="w-[100px] h-[100px]"
-              src="https://www.logodesign.net/logo/abstract-acrobat-man-and-woman-3709ld.png?nwm=1&nws=1&industry=sports-fitness&sf="
-              alt=""
-            />
+            <Link className="text-2xl font-medium" to="">
+              <span className="text-[#36d7b7] ">Camp</span>Sports
+            </Link>
             <p>
               CampSports.com
               <br />

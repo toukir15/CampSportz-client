@@ -19,6 +19,7 @@ export default function SingleInstructor({ instructor }) {
   return (
     <>
       <div
+        data-aos="zoom-out-up"
         className={`max-w-sm ${
           isNight ? "bg-[#1D232A]" : "bg-white"
         }  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8`}

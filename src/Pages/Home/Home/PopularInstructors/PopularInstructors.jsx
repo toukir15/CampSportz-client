@@ -29,7 +29,7 @@ export default function PopularInstructors() {
           className="mySwiper"
         >
           {instructors.map((instructor, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} data-aos="zoom-out-up">
               <div className="mb-12">
                 <div className="hover:bg-slate-300 bg-transparent">
                   <img src={instructor.image} alt="" />

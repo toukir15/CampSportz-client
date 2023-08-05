@@ -9,14 +9,8 @@ export default function SinglePopularCourse({ courseData }) {
   const { image, price, course_name, enrolled_students } = courseData;
 
   return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ rotate: 360, scale: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 20,
-      }}
+    <div
+      data-aos="zoom-in"
       className={`max-w-sm ${
         isNight ? "bg-[#1D232A]" : "bg-white"
       }  rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 mb-12 relative border  `}
@@ -57,6 +51,6 @@ export default function SinglePopularCourse({ courseData }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
