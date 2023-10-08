@@ -1,7 +1,9 @@
-import { motion } from "framer-motion";
 export default function Subscribe() {
   return (
-    <div className=" md:w-3/4  md:mx-auto mx-6 md:h-72 h-84 p-4 bg-[#36d7b7] flex flex-col items-center justify-center space-y-5 mb-12">
+    <div
+      data-aos="zoom-in-down"
+      className=" md:w-3/4  md:mx-auto mx-6 md:h-72 h-84 p-4 bg-[#DBFC00] flex flex-col items-center justify-center space-y-5 mb-12"
+    >
       <h1 className="text-2xl md:text-4xl text-center">
         Subscribe Now Forget <br /> 20% Discount Every Courses
       </h1>

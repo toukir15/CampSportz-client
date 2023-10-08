@@ -34,7 +34,7 @@ export default function Dashboard() {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content  font-medium">
+        <ul className="menu p-4 w-80 h-full text-white bg-black font-medium">
           <div className="mx-auto flex flex-col items-center">
             <img
               src={user?.photoURL}
@@ -56,7 +56,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -72,7 +72,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -93,7 +93,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -109,7 +109,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -129,7 +129,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -145,7 +145,7 @@ export default function Dashboard() {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "active bg-gray-200 text-[#36d7b7]"
+                        ? "active bg-gray-200 text-[#DBFC00]"
                         : ""
                     }
                     activeClassName="active-link"
@@ -164,7 +164,7 @@ export default function Dashboard() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-gray-200 text-[#36d7b7]"
+                  ? "active bg-gray-200 text-[#DBFC00]"
                   : ""
               }
               activeClassName="active-link"
@@ -180,7 +180,7 @@ export default function Dashboard() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-gray-200 text-[#36d7b7]"
+                  ? "active bg-gray-200 text-[#DBFC00]"
                   : ""
               }
               activeClassName="active-link"
@@ -196,7 +196,7 @@ export default function Dashboard() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-gray-200 text-[#36d7b7]"
+                  ? "active bg-gray-200 text-[#DBFC00]"
                   : ""
               }
               activeClassName="active-link"

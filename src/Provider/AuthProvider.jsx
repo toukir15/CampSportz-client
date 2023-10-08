@@ -78,7 +78,6 @@ export const AuthProvider = ({ children }) => {
   const storeTheme = localStorage.getItem("theme");
   document.querySelector("html").setAttribute("data-theme", storeTheme);
   const [themeValue, setTheme] = useState(storeTheme ? storeTheme : "light");
-  console.log(storeTheme);
   const theme = [themeValue, setTheme];
 
   // user info

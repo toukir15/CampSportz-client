@@ -13,7 +13,6 @@ export default function Navbar() {
     theme: themeValue,
   } = useContext(AuthContext);
   const [theme, setTheme] = themeValue;
-  console.log(theme);
   const [isToggle, setIsToggle] = useState(false);
 
   // handle theme change
@@ -30,15 +29,16 @@ export default function Navbar() {
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+
   const handleLogout = () => {
     logout()
       .then(() => console.log("Logout successfully"))
       .catch((error) => console.log(error.message));
   };
   return (
-    <div className="border-b fixed w-full z-10">
+    <div className="border-b sticky top-0 z-10 overflow-hidden bg-black">
       <Container>
-        <div className="navbar bg-base-100 relative">
+        <div className="navbar bg-black relative">
           <div className="flex-1 text-2xl font-medium">
             <div className="flex items-center md:hidden mr-4">
               {isToggle ? (
@@ -47,7 +47,7 @@ export default function Navbar() {
                 <AiOutlineMenuUnfold onClick={() => setIsToggle(!isToggle)} />
               )}
             </div>
-            <Link to="">
+            <Link className="text-white" to="">
               <span className="text-[#36d7b7]">Camp</span>Sports
             </Link>
           </div>
@@ -55,12 +55,12 @@ export default function Navbar() {
           <ul
             className={`${
               isToggle ? " left-4 bg-white transition" : "-left-52"
-            } gap-8 font-medium mr-4 md:flex block absolute md:static top-14  z-10 p-4 rounded`}
+            } gap-8 mr-2 md:flex block absolute md:static top-14  z-10 p-4 rounded font-bold text-white`}
           >
             <li>
               <NavLink
                 to="/"
-                className={({ isActive }) => (isActive ? "text-[#36d7b7]" : "")}
+                className={({ isActive }) => (isActive ? "text-[#DBFC00]" : "")}
               >
                 Home
               </NavLink>
@@ -69,7 +69,7 @@ export default function Navbar() {
             <li>
               <NavLink
                 to="/instructors"
-                className={({ isActive }) => (isActive ? "text-[#36d7b7]" : "")}
+                className={({ isActive }) => (isActive ? "text-[#DBFC00]" : "")}
               >
                 Instructors
               </NavLink>
@@ -77,7 +77,7 @@ export default function Navbar() {
             <li>
               <NavLink
                 to="/courses"
-                className={({ isActive }) => (isActive ? "text-[#36d7b7]" : "")}
+                className={({ isActive }) => (isActive ? "text-[#DBFC00]" : "")}
               >
                 Courses
               </NavLink>
@@ -85,18 +85,31 @@ export default function Navbar() {
             {user && (
               <li>
                 <NavLink
-                  to="/dashboard"
+                  to="/dashboard/selected"
                   className={({ isActive }) =>
-                    isActive ? "text-[#36d7b7]" : ""
+                    isActive ? "text-[#DBFC00]" : ""
                   }
                 >
                   Dashboard
                 </NavLink>
               </li>
             )}
+
+            {/* login and logout btn  */}
+            <li className="border-2 border-[#DBFC00] px-4 py-2  hover:bg-[#DBFC00] hover:text-[black] transition">
+              {user ? (
+                <a onClick={handleLogout}>Logout</a>
+              ) : (
+                <Link to="/login">
+                  <a>Login</a>
+                </Link>
+              )}
+            </li>
           </ul>
           <div className="flex-none">
             <div className="dropdown dropdown-end"></div>
+
+            {/* profile picture  */}
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
@@ -109,22 +122,10 @@ export default function Navbar() {
                   />
                 </div>
               </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
-              >
-                <li>
-                  {user ? (
-                    <a onClick={handleLogout}>Logout</a>
-                  ) : (
-                    <Link to="/login">
-                      <a>Login</a>
-                    </Link>
-                  )}
-                </li>
-              </ul>
             </div>
-            <label className="swap swap-rotate ml-4">
+
+            {/* light and dark mode  */}
+            <label className="swap swap-rotate ml-4 text-white">
               {/* this hidden checkbox controls the state */}
               <input type="checkbox" onChange={handleToggle} />
 

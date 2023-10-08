@@ -14,7 +14,6 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const { user, createUser, updateUserProfile, loading } =
     useContext(AuthContext);
-  console.log(loading);
 
   const {
     register,

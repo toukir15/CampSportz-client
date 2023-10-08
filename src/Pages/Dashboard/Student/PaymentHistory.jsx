@@ -20,7 +20,6 @@ export default function PaymentHistory() {
         console.error("Error retrieving data:", error);
       });
   }, []);
-  console.log(payments);
 
   return (
     <div className="w-full">

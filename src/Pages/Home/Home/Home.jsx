@@ -1,21 +1,29 @@
 import Container from "../../../components/Container";
 import AboutSchool from "./AboutSchool/AboutSchool";
 import Banner from "./Banner";
+import Feature from "./Feature/Feature";
+import OurWork from "./OurWork/OurWork";
 import PopularCourses from "./PopularCourses/PopularCourses";
 import PopularInstructors from "./PopularInstructors/PopularInstructors";
 import Subscribe from "./PopularInstructors/Subscribe/Subscribe";
+import Sponsor from "./Spnonsor/Sponsor";
 import Testimonials from "./Testimonials/Testimonials";
 
 export default function Home() {
   return (
-    <Container>
+    <>
       <Banner />
-      <AboutSchool />
-      <PopularCourses />
-      <Testimonials />
-      <PopularInstructors />
-      <Subscribe />
-    </Container>
+      <Container>
+        <AboutSchool />
+        <PopularCourses />
+        <Testimonials />
+        <PopularInstructors />
+        <Feature />
+        {/* <OurWork /> */}
+        <Subscribe />
+        <Sponsor />
+      </Container>
+    </>
   );
 }
 

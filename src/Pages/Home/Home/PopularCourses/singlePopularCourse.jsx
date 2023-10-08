@@ -1,11 +1,9 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Rating from "react-rating";
-import { motion } from "framer-motion";
 import { useContext } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 export default function SinglePopularCourse({ courseData }) {
   const { isNight } = useContext(AuthContext);
-  console.log(isNight);
   const { image, price, course_name, enrolled_students } = courseData;
 
   return (
@@ -45,7 +43,7 @@ export default function SinglePopularCourse({ courseData }) {
             <p className="font-medium text-center">{enrolled_students}</p>
           </div>
           <div>
-            <button className="px-4 py-2 border rounded-lg hover:text-[#36d7b7] transition">
+            <button className="px-4 py-2 border rounded-lg hover:text-[#DBFC00] transition">
               Add to cart
             </button>
           </div>
